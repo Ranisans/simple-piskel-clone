@@ -1,21 +1,32 @@
 .main_menu {
   position: relative;
 
-  display: flex;
-  justify-content: flex-end;
+  display: grid;
 
   padding: 5px 20px;
 
   background-color: rgb(45, 45, 45);
 
-  &-label {
-    position: absolute;
-    top: 10px;
-    left: 10px;
+  grid-template-columns: 180px auto 120px 120px;
 
+  * {
     margin: 0;
+  }
 
+  &-label {
     color: rgb(255, 255, 255);
+
+    grid-column: 1;
+  }
+
+  &-project_label {
+    align-self: center;
+
+    color: white;
+
+    text-align: center;
+
+    grid-column: 2;
   }
 
   &-button {
