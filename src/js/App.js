@@ -5,7 +5,7 @@ import Menu from './gui/menu/Menu';
 import '../assets/scss/main.scss';
 
 const App = () => (
-  <div>
+  <div className="root">
     <h1>Simple Piskel Clone</h1>
     <Menu />
   </div>
