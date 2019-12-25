@@ -5,6 +5,15 @@ body {
   width: 100%;
 }
 
+h1 {
+  position: absolute;
+
+  overflow: hidden;
+
+  width: 1px;
+  height: 1px;
+}
+
 .section_label {
   position: absolute;
 
