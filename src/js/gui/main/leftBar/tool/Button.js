@@ -1,5 +1,5 @@
 import React from 'react';
 
-const Button = ({ className, value }) => (<div className={[...className].join(' ')}>{value}</div>);
+const Button = ({ className }) => (<div className={[...className].join(' ')}></div>);
 
 export default Button;
