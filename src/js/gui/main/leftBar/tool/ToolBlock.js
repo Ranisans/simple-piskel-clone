@@ -1,5 +1,6 @@
 import React from 'react';
 
+import ColorBlock from './ColorBlock';
 import Button from './Button';
 
 const ToolBlock = () => {
@@ -35,6 +36,8 @@ const ToolBlock = () => {
               ]}
             />))}
         </div>
+
+        <ColorBlock />
       </div>
     </div>
   );
