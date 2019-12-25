@@ -1,0 +1,28 @@
+.right_bar {
+  float: right;
+
+  width: 220px;
+  height: 100%;
+
+  background-color: #1d1d1d;
+
+  grid-column: 3;
+}
+
+
+.preview_canvas_container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 5px auto;
+
+  &-background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABlBMVEVMTExVVVUnhsEkAAAAHUlEQVR4AWOAAUYoQOePEAUj3v9oYDQ9gMBoegAAJFwCAbLaTIMAAAAASUVORK5CYII=") repeat;
+  }
+}
