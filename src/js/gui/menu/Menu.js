@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Label from './Label';
 import Button from './Button';
 
 const Menu = () => {
@@ -11,6 +12,7 @@ const Menu = () => {
     <section className="main_menu">
       <h2 className="section_label">Main Menu</h2>
       <h3 className="main_menu-label">Simple Piskel Clone</h3>
+      <Label />
       {buttons.map((el, i) => (
         <Button
           key={i}
