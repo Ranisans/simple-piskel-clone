@@ -120,6 +120,19 @@
     margin-left: -20px;
     z-index: 1;
   }
+
+  &-switch {
+    background: url('../images/change.png') no-repeat;
+    margin-top: 60px;
+    margin-left: -70px;
+    width: 18px;
+    height: 18px;
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
 
 .color_button {
