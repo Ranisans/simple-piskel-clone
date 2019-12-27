@@ -1,0 +1,35 @@
+.tools_table {
+  display: table;
+
+  height: 100%;
+
+  grid-column: 1;
+}
+
+.tools {
+  display: table-cell;
+
+  vertical-align: middle;
+}
+
+.tool_block {
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+
+  margin-top: 5px;
+  padding-left: 8px;
+
+  &-button {
+    box-sizing: border-box;
+    width: 46px;
+    height: 46px;
+    margin: 1px;
+
+    background-color: rgb(68, 68, 68);
+
+    &--active {
+      border: 2px solid gold;
+    }
+  }
+}

@@ -1,0 +1,56 @@
+.pen_block {
+  display: flex;
+  justify-content: center;
+
+  padding: 2px;
+
+  grid-row: 2;
+
+  &-size {
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    margin-left: 2px;
+
+    border: 2px solid rgb(68, 68, 68);
+
+    &:hover {
+      border-color: rgb(138, 138, 138);
+    }
+
+    &--active {
+      border-color: gold;
+    }
+
+    &::before {
+      display: block;
+
+      width: 100%;
+      height: 100%;
+
+      font-size: 90%;
+      line-height: 12px;
+
+      background-color: rgb(255, 255, 255);
+
+      content: "";
+      text-align: center;
+    }
+  }
+
+  &-s1px {
+    padding: 5px;
+  }
+
+  &-s2px {
+    padding: 4px;
+  }
+
+  &-s3px {
+    padding: 3px;
+  }
+
+  &-s4px {
+    padding: 2px;
+  }
+}

@@ -1,0 +1,88 @@
+.frame_block {
+  grid-column: 2;
+}
+
+.add_frame {
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+
+  width: 96px;
+  margin-top: 8px;
+  padding: 6px 0;
+
+  font-size: 13px;
+
+  color: #888;
+  border: #888 solid 3px;
+  border-radius: 4px;
+  background-color: #222;
+
+  cursor: pointer;
+
+  &-icon {
+    float: left;
+    flex-shrink: 0;
+
+    width: 19px;
+    height: 19px;
+    margin: 3px 0 3px 7px;
+
+    background: url("../images/plus-icon.png") no-repeat;
+  }
+
+  &-label {
+    margin: 0 0 0 10px;
+
+    font-size: 0.8125rem;
+
+    text-align: left;
+  }
+}
+
+.preview_list {
+  padding: 0;
+  padding-right: 9px;
+
+  list-style-type: none;
+}
+
+.preview_tile {
+  width: 96px;
+  height: 96px;
+
+  border: 3px solid rgb(68, 68, 68);
+  border-radius: 3px;
+
+  &:hover {
+    border-color: #999;
+  }
+
+  &--active {
+    border-color: gold;
+
+    &:hover {
+      border-color: gold;
+    }
+  }
+}
+
+.canvas_container {
+  position: relative;
+
+  display: block;
+  overflow: hidden;
+
+  width: 96px;
+  height: 96px;
+
+  &-background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABlBMVEVMTExVVVUnhsEkAAAAHUlEQVR4AWOAAUYoQOePEAUj3v9oYDQ9gMBoegAAJFwCAbLaTIMAAAAASUVORK5CYII=") repeat;
+  }
+}
