@@ -26,10 +26,38 @@
     height: 46px;
     margin: 1px;
 
-    background-color: rgb(68, 68, 68);
+    border: 2px solid rgb(68, 68, 68);
+
+    &:hover {
+      border-color: rgb(117, 117, 117);
+    }
 
     &--active {
-      border: 2px solid gold;
+      border-color: gold;
+
+      &:hover {
+        border-color: gold;
+      }
     }
+  }
+
+  &-pen {
+    background: url("../images/pen.png") no-repeat;
+  }
+
+  &-pipette {
+    background: url("../images/pipette.png") no-repeat;
+  }
+
+  &-bucket {
+    background: url("../images/bucket.png") no-repeat;
+  }
+
+  &-eraser {
+    background: url("../images/eraser.png") no-repeat;
+  }
+
+  &-stroke {
+    background: url("../images/stroke.png") no-repeat ;
   }
 }
