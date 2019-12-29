@@ -3,12 +3,13 @@ import React from 'react';
 import ColorBlock from './ColorBlock';
 import Button from './Button';
 
+import { toolBtn } from '../../../../actions/tool_action_types';
+
 const ToolBlock = () => {
   const penBlokCls = 'pen_block';
   const penSizeBtn = ['s1px', 's2px', 's3px', 's4px'];
 
   const toolBlockCls = 'tool_block';
-  const toolBtn = ['pen', 'pipette', 'bucket', 'eraser', 'stroke'];
 
   return (
     <div className="tools_table">
@@ -26,7 +27,7 @@ const ToolBlock = () => {
         </div>
 
         <div className={toolBlockCls}>
-          {toolBtn.map((el, i) => (
+          {Object.keys(toolBtn).map((el, i) => (
             <Button
               key={i}
               className={[
