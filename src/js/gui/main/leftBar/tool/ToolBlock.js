@@ -2,8 +2,9 @@ import React from 'react';
 
 import ColorBlock from './ColorBlock';
 import Button from './Button';
+import ToolButton from './ToolButton';
 
-import { toolBtn } from '../../../../actions/tool_action_types';
+import { toolBtn } from '../../../../actions/toolActionTypes';
 
 const ToolBlock = () => {
   const penBlokCls = 'pen_block';
@@ -27,14 +28,15 @@ const ToolBlock = () => {
         </div>
 
         <div className={toolBlockCls}>
-          {Object.keys(toolBtn).map((el, i) => (
-            <Button
+          {Object.keys(toolBtn).map((toolName, i) => (
+            <ToolButton
               key={i}
               className={[
                 `${toolBlockCls}-button`,
-                `${toolBlockCls}-${el}`,
-                i === 0 ? `${toolBlockCls}-button--active` : null,
+                `${toolBlockCls}-${toolName}`,
               ]}
+              toolName={toolName}
+              activeBtnClass={`${toolBlockCls}-button--active`}
             />))}
         </div>
 
