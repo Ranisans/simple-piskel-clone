@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ColorBlock from './ColorBlock';
-import Button from './Button';
+import PenSizeButton from './PenSizeButton';
 import ToolButton from './ToolButton';
 
 import { toolBtn } from '../../../../actions/toolActionTypes';
@@ -17,13 +17,14 @@ const ToolBlock = () => {
       <div className="tools">
         <div className={penBlokCls}>
           {penSizeBtn.map((el, i) => (
-            <Button
+            <PenSizeButton
               key={i}
               className={[
                 `${penBlokCls}-size`,
                 `${penBlokCls}-${el}`,
-                i === 0 ? `${penBlokCls}-size--active` : null,
               ]}
+              btnPosition={i}
+              activeBtnClass={`${penBlokCls}-size--active`}
             />))}
         </div>
 
