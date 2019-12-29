@@ -3,7 +3,7 @@ import React from 'react';
 const Frame = ({ canvasId }) => (
   <li className="preview_tile">
     <div className="canvas_container">
-      <div className="canvas_container-background"></div>
+      <div className="canvas_background"></div>
       <canvas
         className="single_frame-canvas"
         id={canvasId}

@@ -11,8 +11,8 @@ const Main = () => {
 
   const resizeWindow = () => {
     if (mainHeight === 0) {
-      canvasContainer = document.querySelector('.main_canvas_container');
-      mainCanvas = document.querySelector('.main_canvas');
+      canvasContainer = document.querySelector('.main_canvas_block');
+      mainCanvas = document.querySelector('.main_canvas_container');
       mainHeight = canvasContainer.clientHeight;
     }
     const containerWidth = canvasContainer.clientWidth;
