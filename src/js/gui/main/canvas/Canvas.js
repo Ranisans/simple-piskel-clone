@@ -1,11 +1,13 @@
 import React from 'react';
 
+import { mainCanvasClass } from '../../../actions/canvasAction';
+
 
 const Canvas = () => (
   <div className="main_canvas_block">
     <div className="main_canvas_container">
-      <div className="canvas_background"></div>
-      <canvas className='main_canvas'></canvas>
+      <div className="canvas_background" ></div>
+      <canvas className={mainCanvasClass} onContextMenu={(e) => { e.preventDefault(); }}></canvas>
     </div>
   </div>
 );
