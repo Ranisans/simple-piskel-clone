@@ -8,13 +8,22 @@ import { colorsElements, changePrimaryColor, changeSecondaryColor } from '../../
 
 const ColorButton = ({ className, colorName }) => {
   const dispatch = useDispatch();
-  const paramArrayPosition = colorName === colorsElements[0].className ? 0 : 1;
+  const primaryPickerId = 0;
+  const secondaryPickerId = 1;
+  const paramArrayPosition = colorName === colorsElements[primaryPickerId].className
+    ? primaryPickerId : secondaryPickerId;
 
   const changeColor = (color) => {
+    const reactInputColorOpacity = 100;
+    const defaultColorOpacity = 255;
+    const colorWithTrueAlpha = {
+      ...color,
+      a: (color.a / reactInputColorOpacity) * defaultColorOpacity,
+    };
     dispatch(
-      paramArrayPosition === 0
-        ? changePrimaryColor({ color })
-        : changeSecondaryColor({ color }),
+      paramArrayPosition === primaryPickerId
+        ? changePrimaryColor({ color: colorWithTrueAlpha })
+        : changeSecondaryColor({ color: colorWithTrueAlpha }),
     );
   };
 
