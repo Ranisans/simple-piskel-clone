@@ -3,24 +3,27 @@ import {
 } from '../actions/frameAction';
 
 export const initialState = {
-  frames: ['frame-1'],
+  frames: [],
 };
 
 export const frameListReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_FRAME: {
-      if (action.payload.position >= 0) {
-        const frames = [...state.frames];
-        frames.splice(
-          action.payload.position, 0, `frame-${action.payload.frameId}`,
-        );
+      const frameId = `frame-${action.payload.frameId}`;
+      if (state.frames.indexOf(frameId)) {
+        if (action.payload.position >= 0) {
+          const frames = [...state.frames];
+          frames.splice(
+            action.payload.position, 0, frameId,
+          );
+          return {
+            frames,
+          };
+        }
         return {
-          frames,
+          frames: [...state.frames, frameId],
         };
-      }
-      return {
-        frames: [...state.frames, `frame-${action.payload.frameId}`],
-      };
+      } return state;
     }
     case REMOVE_FRAME:
       return {
