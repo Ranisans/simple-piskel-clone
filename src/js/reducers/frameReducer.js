@@ -13,12 +13,12 @@ export const frameReducer = (state = initialState, action) => {
       return {
         ...state,
         [action.frameId]: {
-          frameId: action.frameId,
-          imageData: action.imageData,
+          frameId: action.payload.frameId,
+          imageData: action.payload.imageData,
         },
       };
     case REMOVE_FRAME: {
-      const { frameId } = action;
+      const { frameId } = action.payload;
       const { [frameId]: discard, ...newState } = state;
       return newState;
     }
