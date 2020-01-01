@@ -10,14 +10,16 @@ export const frameListReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_FRAME: {
       if (action.payload.position >= 0) {
+        const frames = [...state.frames];
+        frames.splice(
+          action.payload.position, 0, `frame-${action.payload.frameId}`,
+        );
         return {
-          frames: [...state.frames].splice(
-            action.payload.position, 0, action.payload.frameId,
-          ),
+          frames,
         };
       }
       return {
-        frames: [...state.frames].push(action.payload.frameId),
+        frames: [...state.frames, `frame-${action.payload.frameId}`],
       };
     }
     case REMOVE_FRAME:
