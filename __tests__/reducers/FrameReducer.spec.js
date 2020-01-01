@@ -3,17 +3,21 @@ import {
 } from '../../src/actions/frameAction';
 import { initialState, frameReducer } from '../../src/reducers/frameReducer';
 
+const testState = {
+  'frame-1': { frameId: 'frame-1', imageData: null },
+};
+
 describe('frameReducer tests', () => {
   describe('with state in reducer', () => {
     it('add frame', () => {
       const [frameId, imageData] = [2, 'someData'];
       const action = { type: ADD_FRAME, payload: { frameId, imageData } };
       const nextState = {
-        ...initialState,
+        ...testState,
         [`frame-${frameId}`]: { frameId: `frame-${frameId}`, imageData },
       };
 
-      expect(frameReducer(initialState, action)).toEqual(nextState);
+      expect(frameReducer(testState, action)).toEqual(nextState);
     });
 
     it('update frame', () => {
@@ -23,16 +27,7 @@ describe('frameReducer tests', () => {
         [frameId]: { frameId, imageData },
       };
 
-      expect(frameReducer(initialState, action)).toEqual(nextState);
-    });
-
-    it('remove last frame', () => {
-      const [frameId, imageData] = ['frame-1', 'someData'];
-      const updateAction = { type: UPDATE_FRAME, payload: { frameId, imageData } };
-      const stateAfterUpdate = frameReducer(initialState, updateAction);
-
-      const removeAction = { type: REMOVE_FRAME, payload: { frameId } };
-      expect(frameReducer(stateAfterUpdate, removeAction)).toEqual(initialState);
+      expect(frameReducer(testState, action)).toEqual(nextState);
     });
 
     it('remove added frame', () => {
@@ -42,7 +37,7 @@ describe('frameReducer tests', () => {
         type: ADD_FRAME,
         payload: { frameId: secondFrameIdNumber, imageData: secondImageData },
       };
-      const stateAfterAdd = frameReducer(initialState, addAction);
+      const stateAfterAdd = frameReducer(testState, addAction);
 
       const [firstFrameId, firstImageData] = ['frame-1', 'someData A'];
       const updateAction = {
@@ -64,7 +59,7 @@ describe('frameReducer tests', () => {
     it('return current state if action type not tracked', () => {
       const action = { type: 'SOMETHING' };
 
-      expect(frameReducer(initialState, action)).toEqual(initialState);
+      expect(frameReducer(testState, action)).toEqual(testState);
     });
   });
 
@@ -73,7 +68,6 @@ describe('frameReducer tests', () => {
       const [frameId, imageData] = [2, 'someData'];
       const action = { type: ADD_FRAME, payload: { frameId, imageData } };
       const nextState = {
-        ...initialState,
         [`frame-${frameId}`]: { frameId: `frame-${frameId}`, imageData },
       };
 
@@ -83,11 +77,8 @@ describe('frameReducer tests', () => {
     it('update frame', () => {
       const [frameId, imageData] = ['frame-1', 'someData'];
       const action = { type: UPDATE_FRAME, payload: { frameId, imageData } };
-      const nextState = {
-        [frameId]: { frameId, imageData },
-      };
 
-      expect(frameReducer(undefined, action)).toEqual(nextState);
+      expect(frameReducer(undefined, action)).toEqual(initialState);
     });
 
     it('remove last frame', () => {
