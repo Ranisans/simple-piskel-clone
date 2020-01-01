@@ -11,7 +11,7 @@
     "clear": "del-cli dist",
     "build": "npm run clear -s && webpack --progress --mode production",
     "lint": "eslint ./src",
-    "test" : "jest",
+    "test" : "jest --coverage",
     "test:watch": "jest --watch"
   },
   "dependencies": {
@@ -65,7 +65,10 @@
   },
   "jest": {
     "setupFilesAfterEnv": ["<rootDir>/__tests__/setup/setupEnzyme.js"],
-    "testPathIgnorePatterns": ["<rootDir>/__tests__/setup/"]
+    "testPathIgnorePatterns": ["<rootDir>/__tests__/setup/"],
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ]
   },
   "keywords": [],
   "author": "Ranisans",
