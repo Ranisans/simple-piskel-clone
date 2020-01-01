@@ -6,7 +6,7 @@ import store from './store';
 import Menu from './gui/menu/Menu';
 import Main from './gui/main/Main';
 
-import '../assets/scss/main.scss';
+import './assets/scss/main.scss';
 
 const App = () => (
   <Provider store={store}>
