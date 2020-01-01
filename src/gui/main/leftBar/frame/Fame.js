@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-const Frame = ({ canvasId }) => {
+const Frame = ({ frameId }) => {
   let canvas;
   let context;
   let canvasSize = 0;
@@ -11,7 +11,7 @@ const Frame = ({ canvasId }) => {
 
   // didMount
   useEffect(() => {
-    canvas = document.querySelector(`#${canvasId}`);
+    canvas = document.querySelector(`#${frameId}`);
     context = canvas.getContext('2d');
   }, []);
 
@@ -24,13 +24,13 @@ const Frame = ({ canvasId }) => {
       context.imageSmoothingEnabled = false;
     }
 
-    const newImageData = frameData[canvasId].imageData;
+    const newImageData = frameData[frameId].imageData;
     if (newImageData) {
       context.putImageData(newImageData, 0, 0);
     } else if (newImageData === null) {
       context.clearRect(0, 0, canvasData.size, canvasData.size);
     }
-  }, [frameData[canvasId].imageData, canvasData.size]);
+  }, [frameData[frameId].imageData, canvasData.size]);
 
 
   return (
@@ -39,7 +39,7 @@ const Frame = ({ canvasId }) => {
         <div className="canvas_background"></div>
         <canvas
           className="single_frame-canvas"
-          id={canvasId}
+          id={frameId}
           width={canvasBoxSize}
           height={canvasBoxSize}
         ></canvas>
