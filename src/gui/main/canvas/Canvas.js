@@ -4,7 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { mainCanvasClass } from '../../../actions/canvasAction';
 import CanvasLogic from './CanvasLogic';
-import { changePrimaryColor, changeSecondaryColor, colorsElements } from '../../../actions/colorAction';
+import {
+  colorsElements,
+} from '../../../actions/colorAction';
+import {
+  changePrimaryPickerColor,
+  changeSecondaryPickerColor,
+} from '../../../actions/colorPickerAction';
 
 let canvasLogic;
 
@@ -22,11 +28,12 @@ const Canvas = () => {
   const pipetteCallback = ({ colorName, color }) => {
     const colorNamePosition = colorName === colorsElements[primaryPickerId].className
       ? primaryPickerId : secondaryPickerId;
-    dispatch(
-      colorNamePosition === primaryPickerId
-        ? changePrimaryColor({ color })
-        : changeSecondaryColor({ color }),
-    );
+
+    if (colorNamePosition === primaryPickerId) {
+      dispatch(changePrimaryPickerColor({ color }));
+    } else {
+      dispatch(changeSecondaryPickerColor({ color }));
+    }
   };
 
   // didMount
