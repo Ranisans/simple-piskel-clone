@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { activateFrame } from '../../../../actions/frameAction';
+
 
 const Frame = ({ frameId }) => {
   let canvas;
@@ -8,6 +10,8 @@ const Frame = ({ frameId }) => {
   const canvasBoxSize = 96;
   const frameData = useSelector((state) => state.frame);
   const canvasData = useSelector((state) => state.canvas);
+
+  const dispatch = useDispatch();
 
   // didMount
   useEffect(() => {
@@ -32,9 +36,15 @@ const Frame = ({ frameId }) => {
     }
   }, [frameData[frameId].imageData, canvasData.size]);
 
+  const setFrameActive = () => {
+    dispatch(activateFrame({ frameId }));
+  };
 
   return (
-    <li className="preview_tile">
+    <li className={[
+      'preview_tile',
+      frameData.activeFrame === frameId ? 'preview_tile--active' : null,
+    ].join(' ')} onClick={setFrameActive}>
       <div className="canvas_container">
         <div className="canvas_background"></div>
         <canvas
