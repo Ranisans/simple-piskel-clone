@@ -1,6 +1,9 @@
+import BucketLogic from './bucketLogic';
+
 class DrawingCanvas {
   constructor(context) {
     this.context = context;
+    this.BucketLogic = new BucketLogic(this.context);
   }
 
   setPixelSize(size) {
@@ -92,80 +95,14 @@ class DrawingCanvas {
       b: pixelColor[2],
       a: pixelColor[3],
       hex: rgb2hex(pixelColor),
+      rgba: `rgba(${pixelColor[0]}, ${pixelColor[1]}, ${pixelColor[2]}, ${pixelColor[3]})`,
     };
   }
 
-  fillArea(x, y, brushColor) {
-    const imageData = this.context.getImageData(0, 0, this.size, this.size);
-    this.pixels = imageData.data;
-
-    const currentColor = this.getPixelColor(x, y);
-    if (currentColor === `rgba(${brushColor[0]}, ${brushColor[1]}, ${brushColor[2]}, ${brushColor[3]})`) { return; }
-
-    this.brushColor = brushColor;
-
-    const columnTopStack = [];
-    columnTopStack.push([x, y]);
-
-    const isPixelInArea = (currentX, currentY) => {
-      if (currentX >= 0 && currentX < this.size) {
-        return currentColor === this.getPixelColor(currentX, currentY);
-      }
-      return false;
-    };
-
-    while (columnTopStack.length > 0) {
-      let leftIsInArea = false;
-      let rightIsInArea = false;
-      const currentPoint = this._findTopAreaInColumn(...columnTopStack.pop(), currentColor);
-
-      while (currentPoint[1] < this.size && currentColor === this.getPixelColor(...currentPoint)) {
-        if (!leftIsInArea && isPixelInArea(currentPoint[0] - this.pixelSize, currentPoint[1])) {
-          columnTopStack.push([currentPoint[0] - this.pixelSize, currentPoint[1]]);
-          leftIsInArea = true;
-        }
-        if (!rightIsInArea && isPixelInArea(currentPoint[0] + this.pixelSize, currentPoint[1])) {
-          columnTopStack.push([currentPoint[0] + this.pixelSize, currentPoint[1]]);
-          rightIsInArea = true;
-        }
-        const rectStartX = Math.floor(currentPoint[0] / this.pixelSize) * this.pixelSize;
-        const rectStartY = Math.floor(currentPoint[1] / this.pixelSize) * this.pixelSize;
-        this._fillRect(rectStartX, rectStartY);
-        currentPoint[1] += this.pixelSize;
-        if (isPixelInArea(currentPoint[0] - this.pixelSize, currentPoint[1])) {
-          leftIsInArea = false;
-        }
-        if (isPixelInArea(currentPoint[0] + this.pixelSize, currentPoint[1])) {
-          rightIsInArea = false;
-        }
-      }
-    }
-
-    this.content.putImageData(imageData, 0, 0);
-  }
-
-  _fillRect(rectStartX, rectStartY) {
-    for (let y = rectStartY; y < rectStartY + this.pixelSize; y += 1) {
-      for (let x = rectStartX; x < rectStartX + this.pixelSize; x += 1) {
-        const pixelStart = (y * this.size + x) * 4;
-        [
-          this.pixels[pixelStart],
-          this.pixels[pixelStart + 1],
-          this.pixels[pixelStart + 2],
-          this.pixels[pixelStart + 3],
-        ] = this.brushColor;
-      }
-    }
-  }
-
-  _findTopAreaInColumn(x, y, color) {
-    let nextY = y;
-    while (
-      nextY - this.pixelSize >= 0
-      && color === this.getPixelColor(x, nextY - this.pixelSize)) {
-      nextY -= this.pixelSize;
-    }
-    return [x, nextY];
+  fillArea(x, y, bucketColor) {
+    this.BucketLogic.fillArea({
+      pixelSize: this.pixelSize, size: this.size, x, y, bucketColor,
+    });
   }
 }
 

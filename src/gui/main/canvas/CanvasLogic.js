@@ -71,7 +71,7 @@ class CanvasLogic {
         const currentColor = this.DrawingCanvas.getPixelColor(offsetX, offsetY);
         this.pipetteCallback({ colorName, color: currentColor });
       } else if (this.currentTool === toolBtn.bucket) {
-        this._fillArea(offsetX, offsetY);
+        this.DrawingCanvas.fillArea(offsetX, offsetY, color);
       } else {
         const rectStartX = Math.floor(offsetX / this.pixelSize);
         const rectStartY = Math.floor(offsetY / this.pixelSize);
