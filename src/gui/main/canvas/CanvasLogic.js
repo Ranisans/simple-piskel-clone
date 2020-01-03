@@ -1,30 +1,32 @@
 import { mainCanvasClass } from '../../../actions/canvasAction';
 import DrawingCanvas from './DrawingCanvas';
 import { toolBtn } from '../../../actions/toolActionTypes';
-import store from '../../../store';
 
 class CanvasLogic {
-  constructor() {
+  constructor(pipetteCallback) {
     this.canvasObject = document.querySelector(`.${mainCanvasClass}`);
     this.context = this.canvasObject.getContext('2d');
     this.DrawingCanvas = new DrawingCanvas(this.context);
-    this.state = store.getState();
+    this.pipetteCallback = pipetteCallback;
     this.LEFT_BUTTON = 0;
     this.RIGHT_BUTTON = 2;
 
     this._drawInitialization();
   }
 
-  settingPixelSize() {
-    this.pixelSize = this.state.penSize.size;
+  setPixelSize(penSize) {
+    this.pixelSize = penSize;
     this.DrawingCanvas.setPixelSize(this.pixelSize);
   }
 
-  settingCanvasSize() {
-    const canvasSize = this.state.canvas.size;
+  settCanvasBoxSize(boxSize) {
+    this.canvasBoxSize = boxSize;
+    this.canvasProportion = this.canvasSize / this.canvasBoxSize;
+  }
+
+  setCanvasSize(canvasSize) {
     if (this.canvasSize !== canvasSize) {
-      const canvasBoxSize = this.state.canvas.boxSize;
-      this.canvasProportion = canvasSize / canvasBoxSize;
+      this.canvasProportion = canvasSize / this.canvasBoxSize;
       this.canvasSize = canvasSize;
       this.canvasObject.width = canvasSize;
       this.canvasObject.height = canvasSize;
@@ -33,8 +35,12 @@ class CanvasLogic {
     }
   }
 
-  settingTool() {
-    this.currentTool = this.state.tools.tool;
+  setTool(tool) {
+    this.currentTool = tool;
+  }
+
+  setColors(colors) {
+    this.colors = colors;
   }
 
   clear() {
@@ -63,10 +69,7 @@ class CanvasLogic {
 
       if (this.currentTool === toolBtn.pipette) {
         const currentColor = this.DrawingCanvas.getPixelColor(offsetX, offsetY);
-        this.state.color = {
-          ...this.state.color,
-          [colorName]: currentColor,
-        };
+        this.pipetteCallback({ colorName, color: currentColor });
       } else if (this.currentTool === toolBtn.bucket) {
         this._fillArea(offsetX, offsetY);
       } else {
@@ -99,10 +102,10 @@ class CanvasLogic {
     this.canvasObject.addEventListener('mousedown', (e) => {
       const { button } = e;
       if (button === this.LEFT_BUTTON) {
-        color = this.state.color.primary;
+        color = this.colors.primary;
         colorName = 'primary';
       } else if (button === this.RIGHT_BUTTON) {
-        color = this.state.color.secondary;
+        color = this.colors.secondary;
         colorName = 'secondary';
       } else { return; }
       isDrawing = true;

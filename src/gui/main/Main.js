@@ -4,8 +4,7 @@ import { useDispatch } from 'react-redux';
 import LeftBar from './leftBar/LeftBar';
 import RightBar from './rightBar/RightBar';
 import Canvas from './canvas/Canvas';
-import { changeCanvasBoxSize, mainCanvasClass } from '../../actions/canvasAction';
-import CanvasLogic from './canvas/CanvasLogic';
+import { changeCanvasBoxSize } from '../../actions/canvasAction';
 
 const Main = () => {
   let mainHeight = 0;
@@ -30,27 +29,6 @@ const Main = () => {
 
   useEffect(() => {
     resizeWindow();
-    const canvas = document.querySelector(`.${mainCanvasClass}`);
-    const canvasLogic = new CanvasLogic();
-
-    canvas.addEventListener('changeCanvasSize', () => {
-      canvasLogic.settingCanvasSize();
-    });
-
-    canvas.addEventListener('changePenSize', () => {
-      canvasLogic.settingPixelSize();
-    });
-
-    canvas.addEventListener('changeTool', () => {
-      canvasLogic.settingTool();
-    });
-
-    canvas.addEventListener('reset', () => {
-      canvasLogic.resetAll();
-    });
-
-    canvasLogic.settingPixelSize();
-    canvasLogic.settingCanvasSize();
   }, []);
 
   window.addEventListener('resize', resizeWindow);
