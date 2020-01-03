@@ -50,4 +50,11 @@ describe('frameAction tests', () => {
     expect(data.type).toEqual(c.REMOVE_FRAME);
     expect(data.payload.frameId).toEqual(frameId);
   });
+
+  it('activate frame by id', () => {
+    const frameId = 'frame-1';
+    const data = c.activateFrame({ frameId });
+    expect(data.type).toEqual(c.ACTIVATE_FRAME);
+    expect(data.payload.frameId).toEqual(frameId);
+  });
 });

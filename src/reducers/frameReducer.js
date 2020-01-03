@@ -1,5 +1,5 @@
 import {
-  ADD_FRAME, UPDATE_FRAME, REMOVE_FRAME,
+  ADD_FRAME, UPDATE_FRAME, REMOVE_FRAME, ACTIVATE_FRAME,
 } from '../actions/frameAction';
 
 export const initialState = {};
@@ -33,7 +33,14 @@ export const frameReducer = (state = initialState, action) => {
       const { [frameId]: discard, ...newState } = state;
       return newState;
     }
-
+    case ACTIVATE_FRAME: {
+      if (state[action.payload.frameId]) {
+        return {
+          ...state,
+          activeFrame: action.payload.frameId,
+        };
+      } return state;
+    }
     default:
       return state;
   }

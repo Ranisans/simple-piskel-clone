@@ -1,6 +1,7 @@
 export const ADD_FRAME = 'ADD_FRAME';
 export const UPDATE_FRAME = 'UPDATE_FRAME';
 export const REMOVE_FRAME = 'REMOVE_FRAME';
+export const ACTIVATE_FRAME = 'ACTIVATE_FRAME';
 
 export const addFrame = ({ frameId, position = -1, imageData = null }) => (
   {
@@ -26,6 +27,13 @@ export const updateFrame = ({ frameId, imageData = null }) => (
 export const removeFrame = ({ frameId }) => (
   {
     type: REMOVE_FRAME,
+    payload: { frameId },
+  }
+);
+
+export const activateFrame = ({ frameId }) => (
+  {
+    type: ACTIVATE_FRAME,
     payload: { frameId },
   }
 );
