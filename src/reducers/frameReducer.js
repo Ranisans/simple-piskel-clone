@@ -1,5 +1,9 @@
 import {
-  ADD_FRAME, UPDATE_FRAME, REMOVE_FRAME, ACTIVATE_FRAME,
+  ADD_FRAME,
+  UPDATE_FRAME,
+  REMOVE_FRAME,
+  ACTIVATE_FRAME,
+  SET_ACTIVE_IMAGE_DATA,
 } from '../actions/frameAction';
 
 export const initialState = {};
@@ -41,6 +45,11 @@ export const frameReducer = (state = initialState, action) => {
         };
       } return state;
     }
+    case SET_ACTIVE_IMAGE_DATA:
+      return {
+        ...state,
+        activeImageData: action.payload.imageData,
+      };
     default:
       return state;
   }

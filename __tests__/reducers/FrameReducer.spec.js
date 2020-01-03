@@ -1,5 +1,9 @@
 import {
-  ADD_FRAME, UPDATE_FRAME, REMOVE_FRAME, ACTIVATE_FRAME,
+  ADD_FRAME,
+  UPDATE_FRAME,
+  REMOVE_FRAME,
+  ACTIVATE_FRAME,
+  SET_ACTIVE_IMAGE_DATA,
 } from '../../src/actions/frameAction';
 import { frameReducer } from '../../src/reducers/frameReducer';
 
@@ -70,6 +74,17 @@ const testsBlock = (startState) => {
     };
 
     expect(frameReducer(stateAfterAdd, setActiveFrameAction)).toEqual(resultState);
+  });
+
+  it('set active imageData', () => {
+    const imageData = 'someImageData';
+    const action = { type: SET_ACTIVE_IMAGE_DATA, payload: { imageData } };
+    const newState = {
+      ...startState,
+      activeImageData: imageData,
+    };
+
+    expect(frameReducer(startState, action)).toEqual(newState);
   });
 
   it('return current state if action type not tracked', () => {

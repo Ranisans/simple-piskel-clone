@@ -57,4 +57,11 @@ describe('frameAction tests', () => {
     expect(data.type).toEqual(c.ACTIVATE_FRAME);
     expect(data.payload.frameId).toEqual(frameId);
   });
+
+  it('set active imageData', () => {
+    const imageData = 'someImageData';
+    const data = c.setActiveImageData({ imageData });
+    expect(data.type).toEqual(c.SET_ACTIVE_IMAGE_DATA);
+    expect(data.payload.imageData).toEqual(imageData);
+  });
 });
