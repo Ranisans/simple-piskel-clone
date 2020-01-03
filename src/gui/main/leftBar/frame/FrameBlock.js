@@ -4,7 +4,7 @@ import uuid from 'uuid-random';
 
 import AddFrameButton from './AddFrameButton';
 import Frame from './Fame';
-import { addFrame } from '../../../../actions/frameAction';
+import { addFrame, activateFrame } from '../../../../actions/frameAction';
 
 const FrameBlock = () => {
   const dispatch = useDispatch();
@@ -16,6 +16,9 @@ const FrameBlock = () => {
 
   if (frameList.frames.length === 0) {
     addCleanFrame();
+  } else if (frameList.frames.length === 1) {
+    const [frameId] = frameList.frames;
+    dispatch(activateFrame({ frameId }));
   }
 
   return (
