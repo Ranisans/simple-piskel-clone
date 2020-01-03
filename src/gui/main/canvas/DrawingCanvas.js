@@ -78,8 +78,21 @@ class DrawingCanvas {
   }
 
   getPixelColor(offsetX, offsetY) {
+    function rgb2hex(rgb) {
+      return (rgb && rgb.length === 4) ? `#${
+        (`0${rgb[0].toString(16)}`).slice(-2)}`
+        + `${(`0${rgb[1].toString(16)}`).slice(-2)}`
+        + `${(`0${rgb[2].toString(16)}`).slice(-2)}`
+        + `${(`0${rgb[3].toString(16)}`).slice(-2)}` : '';
+    }
     const pixelColor = this.context.getImageData(offsetX, offsetY, 1, 1).data;
-    return `rgba(${pixelColor[0]}, ${pixelColor[1]}, ${pixelColor[2]}, ${pixelColor[3]})`;
+    return {
+      r: pixelColor[0],
+      g: pixelColor[1],
+      b: pixelColor[2],
+      a: pixelColor[3],
+      hex: rgb2hex(pixelColor),
+    };
   }
 
   fillArea(x, y, brushColor) {
