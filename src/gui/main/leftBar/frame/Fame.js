@@ -1,40 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { activateFrame } from '../../../../actions/frameAction';
+import FrameLogic from './FrameLogic';
 
 
 const Frame = ({ frameId }) => {
-  let canvas;
-  let context;
-  let canvasSize = 0;
   const canvasBoxSize = 96;
   const frameData = useSelector((state) => state.frame);
   const canvasData = useSelector((state) => state.canvas);
+
+  const [frameLogic] = useState(new FrameLogic());
 
   const dispatch = useDispatch();
 
   // didMount
   useEffect(() => {
-    canvas = document.querySelector(`#${frameId}`);
-    context = canvas.getContext('2d');
+    frameLogic.initialize(frameId, canvasBoxSize);
   }, []);
 
-  // didUpdate if set imageData or change size of canvas
+  // didUpdate size of canvas
   useEffect(() => {
-    if (canvasSize !== canvasData.size) {
-      canvasSize = canvasData.size;
-      canvas.width = canvasSize;
-      canvas.height = canvasSize;
-      context.imageSmoothingEnabled = false;
-    }
+    frameLogic.setSize(canvasData.size);
+  }, [canvasData.size]);
 
-    const newImageData = frameData[frameId].imageData;
-    if (newImageData) {
-      context.putImageData(newImageData, 0, 0);
-    } else if (newImageData === null) {
-      context.clearRect(0, 0, canvasData.size, canvasData.size);
-    }
-  }, [frameData[frameId].imageData, canvasData.size]);
+  // didUpdate if set imageData
+  useEffect(() => {
+    frameLogic.setImage(frameData[frameId].imageData);
+  }, [frameData[frameId].imageData]);
 
   const setFrameActive = () => {
     dispatch(activateFrame({ frameId }));
@@ -45,10 +37,10 @@ const Frame = ({ frameId }) => {
       'preview_tile',
       frameData.activeFrame === frameId ? 'preview_tile--active' : null,
     ].join(' ')} onClick={setFrameActive}>
-      <div className="canvas_container">
+      <div className="frame_container">
         <div className="canvas_background"></div>
         <canvas
-          className="single_frame-canvas"
+          className="frame_container-canvas"
           id={frameId}
           width={canvasBoxSize}
           height={canvasBoxSize}
