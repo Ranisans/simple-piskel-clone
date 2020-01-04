@@ -11,6 +11,7 @@ import {
   changePrimaryPickerColor,
   changeSecondaryPickerColor,
 } from '../../../actions/colorPickerAction';
+import { updateActiveFrame } from '../../../actions/frameAction';
 
 
 const Canvas = () => {
@@ -35,7 +36,13 @@ const Canvas = () => {
     }
   };
 
-  const [canvasLogic] = useState(new CanvasLogic(pipetteCallback));
+  const frameUpdateCallback = (imageData) => {
+    dispatch(updateActiveFrame({ imageData }));
+  };
+
+  const [canvasLogic] = useState(
+    new CanvasLogic({ pipetteCallback, frameUpdateCallback }),
+  );
 
   // didMount
   useEffect(() => {

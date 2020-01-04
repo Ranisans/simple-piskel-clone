@@ -3,8 +3,9 @@ import DrawingCanvas from './DrawingCanvas';
 import { toolBtn } from '../../../actions/toolActionTypes';
 
 class CanvasLogic {
-  constructor(pipetteCallback) {
+  constructor({ pipetteCallback, frameUpdateCallback }) {
     this.pipetteCallback = pipetteCallback;
+    this.frameUpdateCallback = frameUpdateCallback;
   }
 
   initialize() {
@@ -73,7 +74,9 @@ class CanvasLogic {
       if (this.currentTool === toolBtn.pipette) {
         const currentColor = this.DrawingCanvas.getPixelColor(offsetX, offsetY);
         this.pipetteCallback({ colorName, color: currentColor });
-      } else if (this.currentTool === toolBtn.bucket) {
+        return;
+      }
+      if (this.currentTool === toolBtn.bucket) {
         this.DrawingCanvas.fillArea(offsetX, offsetY, color);
       } else {
         const rectStartX = Math.floor(offsetX / this.pixelSize);
@@ -97,6 +100,9 @@ class CanvasLogic {
           latestY = rectStartY;
         }
       }
+
+      const imageData = this.context.getImageData(0, 0, this.canvasSize, this.canvasSize);
+      this.frameUpdateCallback(imageData);
     };
 
     const thisDraw = draw.bind(this);
