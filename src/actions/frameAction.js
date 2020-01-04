@@ -15,11 +15,10 @@ export const addFrame = ({ frameId, position = -1, imageData = null }) => (
   }
 );
 
-export const updateFrame = ({ frameId, imageData = null }) => (
+export const updateActiveFrame = ({ imageData = null }) => (
   {
     type: UPDATE_FRAME,
     payload: {
-      frameId,
       imageData,
     },
   }

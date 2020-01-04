@@ -29,18 +29,15 @@ describe('frameAction tests', () => {
   });
 
   it('update frame without imageData', () => {
-    const [frameId] = ['frame-2'];
-    const data = c.updateFrame({ frameId });
+    const data = c.updateActiveFrame({});
     expect(data.type).toEqual(c.UPDATE_FRAME);
-    expect(data.payload.frameId).toEqual(frameId);
     expect(data.payload.imageData).toEqual(null);
   });
 
-  it('update frame without imageData', () => {
-    const [frameId, imageData] = ['frame-2', 'SomeData'];
-    const data = c.updateFrame({ frameId, imageData });
+  it('update active frame without imageData', () => {
+    const imageData = 'SomeData';
+    const data = c.updateActiveFrame({ imageData });
     expect(data.type).toEqual(c.UPDATE_FRAME);
-    expect(data.payload.frameId).toEqual(frameId);
     expect(data.payload.imageData).toEqual(imageData);
   });
 
