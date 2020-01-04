@@ -21,15 +21,19 @@ const testsBlock = (startState) => {
 
   it('update frame', () => {
     const [frameId, imageData] = ['frame-1', 'someData'];
-    const action = { type: UPDATE_FRAME, payload: { frameId, imageData } };
+    const setActiveFrameAction = { type: ACTIVATE_FRAME, payload: { frameId } };
+    const activatedFrameState = frameReducer(startState, setActiveFrameAction);
+
+    const setUpdateFrame = { type: UPDATE_FRAME, payload: { imageData } };
     const nextState = {
+      ...activatedFrameState,
       [frameId]: { frameId, imageData },
     };
 
     if (startState) {
-      expect(frameReducer(startState, action)).toEqual(nextState);
+      expect(frameReducer(activatedFrameState, setUpdateFrame)).toEqual(nextState);
     } else {
-      expect(frameReducer(startState, action)).toEqual({});
+      expect(frameReducer(activatedFrameState, setUpdateFrame)).toEqual({});
     }
   });
 

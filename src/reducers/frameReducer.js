@@ -22,11 +22,11 @@ export const frameReducer = (state = initialState, action) => {
       } return state;
     }
     case UPDATE_FRAME: {
-      if (state[action.payload.frameId]) {
+      if (state.activeFrame) {
         return {
           ...state,
-          [action.payload.frameId]: {
-            ...state[action.payload.frameId],
+          [state.activeFrame]: {
+            ...state[state.activeFrame],
             imageData: action.payload.imageData,
           },
         };
