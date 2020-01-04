@@ -4,10 +4,13 @@ import { toolBtn } from '../../../actions/toolActionTypes';
 
 class CanvasLogic {
   constructor(pipetteCallback) {
+    this.pipetteCallback = pipetteCallback;
+  }
+
+  initialize() {
     this.canvasObject = document.querySelector(`.${mainCanvasClass}`);
     this.context = this.canvasObject.getContext('2d');
     this.DrawingCanvas = new DrawingCanvas(this.context);
-    this.pipetteCallback = pipetteCallback;
     this.LEFT_BUTTON = 0;
     this.RIGHT_BUTTON = 2;
 

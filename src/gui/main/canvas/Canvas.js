@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { mainCanvasClass } from '../../../actions/canvasAction';
@@ -12,7 +12,6 @@ import {
   changeSecondaryPickerColor,
 } from '../../../actions/colorPickerAction';
 
-let canvasLogic;
 
 const Canvas = () => {
   const primaryPickerId = 0;
@@ -36,9 +35,11 @@ const Canvas = () => {
     }
   };
 
+  const [canvasLogic] = useState(new CanvasLogic(pipetteCallback));
+
   // didMount
   useEffect(() => {
-    canvasLogic = new CanvasLogic(pipetteCallback);
+    canvasLogic.initialize();
   }, []);
 
   // didUpdate canvas box size
