@@ -68,7 +68,7 @@
   }
 }
 
-.canvas_container {
+.frame_container {
   position: relative;
 
   display: block;
@@ -76,4 +76,13 @@
 
   width: 96px;
   height: 96px;
+
+  &-canvas {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    image-rendering: pixelated;
+  }
 }
