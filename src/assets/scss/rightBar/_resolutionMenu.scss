@@ -1,0 +1,23 @@
+.resolution_menu {
+  display: block;
+
+  width: 100px;
+  margin: 5px auto;
+
+  color: white;
+  border-radius: 5px;
+  outline: 0;
+  background-color: #1d1d1d;
+
+  text-align-last: center;
+  &_label {
+    display: block;
+
+    width: $RightBarElWidth;
+    margin: 5px auto;
+
+    color: white;
+
+    text-align: center;
+  }
+}
