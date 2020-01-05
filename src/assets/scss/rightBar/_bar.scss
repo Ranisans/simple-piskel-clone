@@ -1,3 +1,6 @@
+@import 'constants';
+@import 'resolutionMenu';
+
 .right_bar {
   float: right;
 
@@ -12,7 +15,7 @@
 
 .preview_canvas_container {
   position: relative;
-  width: 200px;
+  width: $RightBarElWidth;
   height: 200px;
   margin: 5px auto;
 }
