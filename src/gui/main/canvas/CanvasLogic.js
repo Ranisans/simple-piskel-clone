@@ -51,6 +51,14 @@ class CanvasLogic {
     this.context.clearRect(0, 0, this.canvasSize, this.canvasSize);
   }
 
+  setImageData(imageData) {
+    if (imageData) {
+      this.context.putImageData(imageData, 0, 0);
+    } else {
+      this.clear();
+    }
+  }
+
   _drawInitialization() {
     let isDrawing = false;
     let latestX = -1;

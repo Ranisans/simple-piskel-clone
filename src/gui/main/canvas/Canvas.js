@@ -22,6 +22,7 @@ const Canvas = () => {
   const penSizeState = useSelector((state) => state.penSize);
   const toolState = useSelector((state) => state.tools);
   const colorsState = useSelector((state) => state.color);
+  const frameState = useSelector((state) => state.frame);
 
   const dispatch = useDispatch();
 
@@ -73,6 +74,11 @@ const Canvas = () => {
   useEffect(() => {
     canvasLogic.setColors(colorsState);
   }, [colorsState]);
+
+  // didUpdate activeImageData
+  useEffect(() => {
+    canvasLogic.setImageData(frameState.activeImageData);
+  }, [frameState.activeFrame]);
 
   return (
     <div className="main_canvas_block">
