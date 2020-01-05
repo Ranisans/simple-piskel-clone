@@ -86,28 +86,24 @@ class CanvasLogic {
       }
       if (this.currentTool === toolBtn.bucket) {
         this.DrawingCanvas.fillArea(offsetX, offsetY, color);
-      } else {
-        const rectStartX = Math.floor(offsetX / this.pixelSize);
-        const rectStartY = Math.floor(offsetY / this.pixelSize);
-
-        if (rectStartX !== latestX || rectStartY !== latestY) {
-          if (latestX === -1) {
-            this.DrawingCanvas.drawRect(
-              offsetX,
-              offsetY,
-              [color.r, color.g, color.b, color.a],
-            );
-          } else {
-            this.DrawingCanvas.drawWithBresenhamAlgorithm(
-              latestX, latestY, rectStartX, rectStartY,
-              [color.r, color.g, color.b, color.a],
-            );
-          }
-
-          latestX = rectStartX;
-          latestY = rectStartY;
+      } else if (offsetX !== latestX || offsetY !== latestY) {
+        if (latestX === -1) {
+          this.DrawingCanvas.drawRect(
+            offsetX,
+            offsetY,
+            [color.r, color.g, color.b, color.a],
+          );
+        } else {
+          this.DrawingCanvas.drawWithBresenhamAlgorithm(
+            latestX, latestY, offsetX, offsetY,
+            [color.r, color.g, color.b, color.a],
+          );
         }
+
+        latestX = offsetX;
+        latestY = offsetY;
       }
+
 
       const imageData = this.context.getImageData(0, 0, this.canvasSize, this.canvasSize);
       this.frameUpdateCallback(imageData);

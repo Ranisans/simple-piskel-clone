@@ -39,7 +39,7 @@ class DrawingCanvas {
 
       error = doubling * deltaY - deltaX;
       for (let x = xStart; x <= xEnd; x += 1) {
-        this.drawRect(x * this.pixelSize, y * this.pixelSize, color);
+        this.drawRect(x, y, color);
 
         if (error > 0) {
           y += yDirection;
@@ -57,7 +57,7 @@ class DrawingCanvas {
 
       error = doubling * deltaX - deltaY;
       for (let y = yStart; y <= yEnd; y += 1) {
-        this.drawRect(x * this.pixelSize, y * this.pixelSize, color);
+        this.drawRect(x, y, color);
 
         if (error > 0) {
           x += xDirection;
