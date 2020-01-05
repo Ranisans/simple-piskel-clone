@@ -1,6 +1,7 @@
 import { mainCanvasClass } from '../../../actions/canvasAction';
 import DrawingCanvas from './DrawingCanvas';
 import { toolBtn } from '../../../actions/toolActionTypes';
+import { eraserColor, colorsElements } from '../../../actions/colorAction';
 
 class CanvasLogic {
   constructor({ pipetteCallback, frameUpdateCallback }) {
@@ -114,12 +115,14 @@ class CanvasLogic {
     this.canvasObject.addEventListener('mousemove', thisDraw);
     this.canvasObject.addEventListener('mousedown', (e) => {
       const { button } = e;
-      if (button === this.LEFT_BUTTON) {
+      if (this.currentTool === toolBtn.eraser) {
+        color = eraserColor;
+      } else if (button === this.LEFT_BUTTON) {
         color = this.colors.primary;
-        colorName = 'primary';
+        colorName = colorsElements[0].className;
       } else if (button === this.RIGHT_BUTTON) {
         color = this.colors.secondary;
-        colorName = 'secondary';
+        colorName = colorsElements[1].className;
       } else { return; }
       isDrawing = true;
       e.preventDefault();

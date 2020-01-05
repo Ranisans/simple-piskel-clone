@@ -13,6 +13,10 @@ export const colorsElements = [
   },
 ];
 
+export const eraserColor = {
+  r: 0, g: 0, b: 0, a: 0,
+};
+
 export const CHANGE_PRIMARY_COLOR = 'CHANGE_PRIMARY_COLOR';
 export const CHANGE_SECONDARY_COLOR = 'CHANGE_SECONDARY_COLOR';
 
