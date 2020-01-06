@@ -10,12 +10,19 @@ export const initialState = {};
 export const frameReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_FRAME: {
-      if (!state[`frame-${action.payload.frameId}`]) {
+      const frameId = `frame-${action.payload.frameId}`;
+      if (!state[frameId]) {
+        let imageData = null;
+        const { parentFrame } = action.payload;
+        if (state[parentFrame]) {
+          const parentImageData = state[parentFrame].imageData;
+          imageData = parentImageData || null;
+        }
         return {
           ...state,
-          [`frame-${action.payload.frameId}`]: {
-            frameId: `frame-${action.payload.frameId}`,
-            imageData: action.payload.imageData,
+          [frameId]: {
+            frameId,
+            imageData,
           },
         };
       } return state;
