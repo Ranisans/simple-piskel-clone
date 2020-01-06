@@ -1,7 +1,7 @@
 import React from 'react';
 
 import PreviewWindow from './preview/PreviewWindow';
-import Resolution from './Resolution';
+import Resolution from './action/Resolution';
 
 const RightBar = () => (
   <div className="right_bar">
