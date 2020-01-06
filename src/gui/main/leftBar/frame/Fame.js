@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import { activateFrame } from '../../../../actions/frameAction';
 import FrameLogic from './FrameLogic';
+import CopyButton from './CopyButton';
+import DeleteButton from './DeleteButton';
 
 
 const Frame = ({ frameId }) => {
@@ -45,9 +49,15 @@ const Frame = ({ frameId }) => {
           width={canvasBoxSize}
           height={canvasBoxSize}
         ></canvas>
+        <CopyButton frameId={frameId} />
+        <DeleteButton frameId={frameId} />
       </div>
     </li>
   );
+};
+
+Frame.propTypes = {
+  frameId: PropTypes.string,
 };
 
 export default Frame;
