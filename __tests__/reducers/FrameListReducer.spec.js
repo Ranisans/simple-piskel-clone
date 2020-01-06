@@ -8,90 +8,101 @@ const testState = {
   frames: ['frame-1'],
 };
 
+const testBlock = (startState) => {
+  it('add frame without parentId', () => {
+    const frameId = 2;
+    const action = { type: ADD_FRAME, payload: { frameId } };
+    if (startState) {
+      const nextState = {
+        frames: [...startState.frames, `frame-${frameId}`],
+      };
+      expect(frameListReducer(startState, action)).toEqual(nextState);
+    } else {
+      const nextState = {
+        frames: [`frame-${frameId}`],
+      };
+      expect(frameListReducer(undefined, action)).toEqual(nextState);
+    }
+  });
+
+  it('add frame with parentId', () => {
+    const secondFrame = 2;
+    const addAction = { type: ADD_FRAME, payload: { frameId: secondFrame } };
+    const stateAfterAdd = frameListReducer(startState, addAction);
+
+    const [thirdFrame, parentFrame] = [3, 'frame-1'];
+    const addAfterParentAction = {
+      type: ADD_FRAME,
+      payload: { frameId: thirdFrame, parentFrame },
+    };
+
+    if (startState) {
+      const stateAfterAddWithParent = {
+        frames: ['frame-1', 'frame-3', 'frame-2'],
+      };
+      expect(
+        frameListReducer(stateAfterAdd, addAfterParentAction),
+      ).toEqual(stateAfterAddWithParent);
+    } else {
+      const stateAfterAddWithParent = {
+        frames: ['frame-2', 'frame-3'],
+      };
+      expect(
+        frameListReducer(stateAfterAdd, addAfterParentAction),
+      ).toEqual(stateAfterAddWithParent);
+    }
+  });
+
+  it('add frame with exist id', () => {
+    const frameId = 1;
+    const addAction = { type: ADD_FRAME, payload: { frameId } };
+
+    if (startState) {
+      expect(
+        frameListReducer(startState, addAction),
+      ).toEqual(startState);
+    } else {
+      const stateAfterAdd = {
+        frames: [`frame-${frameId}`],
+      };
+      expect(
+        frameListReducer(startState, addAction),
+      ).toEqual(stateAfterAdd);
+    }
+  });
+
+  it('remove frame', () => {
+    const secondFrameIdNumber = 2;
+    const secondFrameId = `frame-${secondFrameIdNumber}`;
+    const addAction = { type: ADD_FRAME, payload: { frameId: secondFrameIdNumber } };
+    const stateAfterAdd = frameListReducer(startState, addAction);
+
+    const firstFrameId = 'frame-1';
+    const removeAction = { type: REMOVE_FRAME, payload: { frameId: firstFrameId } };
+    const stateAfterRemove = {
+      frames: [secondFrameId],
+    };
+
+    expect(frameListReducer(stateAfterAdd, removeAction)).toEqual(stateAfterRemove);
+  });
+
+  it('return current state if action type not tracked', () => {
+    const action = { type: 'SOMETHING' };
+
+    if (startState) {
+      expect(frameListReducer(startState, action)).toEqual(startState);
+    } else {
+      expect(frameListReducer(startState, action)).toEqual(initialState);
+    }
+  });
+};
+
 describe('frameListReducer tests', () => {
   describe('with state in reducer', () => {
-    it('add frame without position', () => {
-      const frameId = 2;
-      const action = { type: ADD_FRAME, payload: { frameId } };
-      const nextState = {
-        frames: [...testState.frames, `frame-${frameId}`],
-      };
-
-      expect(frameListReducer(testState, action)).toEqual(nextState);
-    });
-
-    it('add frame with position', () => {
-      const [frameId, position] = [2, 0];
-      const action = { type: ADD_FRAME, payload: { frameId, position } };
-      const nextState = {
-        frames: [`frame-${frameId}`, ...testState.frames],
-      };
-
-      expect(frameListReducer(testState, action)).toEqual(nextState);
-    });
-
-    it('remove frame', () => {
-      const secondFrameIdNumber = 2;
-      const secondFrameId = `frame-${secondFrameIdNumber}`;
-      const addAction = { type: ADD_FRAME, payload: { frameId: secondFrameIdNumber } };
-      const stateAfterAdd = frameListReducer(testState, addAction);
-
-      const firstFrameId = 'frame-1';
-      const removeAction = { type: REMOVE_FRAME, payload: { frameId: firstFrameId } };
-      const stateAfterRemove = {
-        frames: [secondFrameId],
-      };
-
-      expect(frameListReducer(stateAfterAdd, removeAction)).toEqual(stateAfterRemove);
-    });
-
-    it('return current state if action type not tracked', () => {
-      const action = { type: 'SOMETHING' };
-
-      expect(frameListReducer(testState, action)).toEqual(testState);
-    });
+    testBlock(testState);
   });
 
   describe('without state in reducer', () => {
-    it('add frame without position', () => {
-      const frameId = 2;
-      const action = { type: ADD_FRAME, payload: { frameId } };
-      const nextState = {
-        frames: [...initialState.frames, `frame-${frameId}`],
-      };
-
-      expect(frameListReducer(undefined, action)).toEqual(nextState);
-    });
-
-    it('add frame with position', () => {
-      const [frameId, position] = [2, 0];
-      const action = { type: ADD_FRAME, payload: { frameId, position } };
-      const nextState = {
-        frames: [`frame-${frameId}`, ...initialState.frames],
-      };
-
-      expect(frameListReducer(undefined, action)).toEqual(nextState);
-    });
-
-    it('remove frame', () => {
-      const secondFrameIdNumber = 2;
-      const secondFrameId = `frame-${secondFrameIdNumber}`;
-      const addAction = { type: ADD_FRAME, payload: { frameId: secondFrameIdNumber } };
-      const stateAfterAdd = frameListReducer(undefined, addAction);
-
-      const firstFrameId = 'frame-1';
-      const removeAction = { type: REMOVE_FRAME, payload: { frameId: firstFrameId } };
-      const stateAfterRemove = {
-        frames: [secondFrameId],
-      };
-
-      expect(frameListReducer(stateAfterAdd, removeAction)).toEqual(stateAfterRemove);
-    });
-
-    it('return current state if action type not tracked', () => {
-      const action = { type: 'SOMETHING' };
-
-      expect(frameListReducer(undefined, action)).toEqual(initialState);
-    });
+    testBlock(undefined);
   });
 });
