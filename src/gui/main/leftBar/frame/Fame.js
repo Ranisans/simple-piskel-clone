@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Draggable } from 'react-beautiful-dnd';
 
 import { activateFrame } from '../../../../actions/frameAction';
 import FrameLogic from './FrameLogic';
@@ -8,7 +9,7 @@ import CopyButton from './CopyButton';
 import DeleteButton from './DeleteButton';
 
 
-const Frame = ({ frameId }) => {
+const Frame = ({ frameId, index }) => {
   const canvasBoxSize = 96;
   const frameData = useSelector((state) => state.frame);
   const canvasData = useSelector((state) => state.canvas);
@@ -37,22 +38,30 @@ const Frame = ({ frameId }) => {
   };
 
   return (
-    <li className={[
-      'preview_tile',
-      frameData.activeFrame === frameId ? 'preview_tile--active' : null,
-    ].join(' ')} onClick={setFrameActive}>
-      <div className="frame_container">
-        <div className="canvas_background"></div>
-        <canvas
-          className="frame_container-canvas"
-          id={frameId}
-          width={canvasBoxSize}
-          height={canvasBoxSize}
-        ></canvas>
-        <CopyButton frameId={frameId} />
-        <DeleteButton frameId={frameId} />
-      </div>
-    </li>
+    <Draggable draggableId={frameId} index={index}>
+      {(provided) => (
+        <div className={[
+          'preview_tile',
+          frameData.activeFrame === frameId ? 'preview_tile--active' : null,
+        ].join(' ')} onClick={setFrameActive}
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          <div className="frame_container">
+            <div className="canvas_background"></div>
+            <canvas
+              className="frame_container-canvas"
+              id={frameId}
+              width={canvasBoxSize}
+              height={canvasBoxSize}
+            ></canvas>
+            <CopyButton frameId={frameId} />
+            <DeleteButton frameId={frameId} />
+          </div>
+        </div>
+      )}
+    </Draggable>
   );
 };
 
