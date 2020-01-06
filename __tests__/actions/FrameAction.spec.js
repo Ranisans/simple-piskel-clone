@@ -43,4 +43,12 @@ describe('frameAction tests', () => {
     expect(data.type).toEqual(c.ACTIVATE_FRAME);
     expect(data.payload.frameId).toEqual(frameId);
   });
+
+  it('move frame from source to destination', () => {
+    const [source, destination] = [1, 0];
+    const data = c.moveFrame({ source, destination });
+    expect(data.type).toEqual(c.MOVE_FRAME);
+    expect(data.payload.source).toEqual(source);
+    expect(data.payload.destination).toEqual(destination);
+  });
 });

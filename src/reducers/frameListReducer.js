@@ -1,5 +1,5 @@
 import {
-  ADD_FRAME, REMOVE_FRAME,
+  ADD_FRAME, REMOVE_FRAME, MOVE_FRAME,
 } from '../actions/frameAction';
 
 export const initialState = {
@@ -34,6 +34,15 @@ export const frameListReducer = (state = initialState, action) => {
         ...state,
         frames: state.frames.filter((frameId) => frameId !== action.payload.frameId),
       };
+    case MOVE_FRAME: {
+      const frames = [...state.frames];
+      const { source, destination } = action.payload;
+      frames.splice(destination, 0, frames.splice(source, 1)[0]);
+      return {
+        ...state,
+        frames,
+      };
+    }
     default:
       return state;
   }

@@ -1,5 +1,5 @@
 import {
-  ADD_FRAME, REMOVE_FRAME,
+  ADD_FRAME, REMOVE_FRAME, MOVE_FRAME,
 } from '../../src/actions/frameAction';
 
 import { initialState, frameListReducer } from '../../src/reducers/frameListReducer';
@@ -84,6 +84,30 @@ const testBlock = (startState) => {
     };
 
     expect(frameListReducer(stateAfterAdd, removeAction)).toEqual(stateAfterRemove);
+  });
+
+  it('move frame in the List from source to destination', () => {
+    // function called only if framesList length > 1
+    if (startState) {
+      const firstFrameId = 'frame-1';
+      const secondFrameIdNumber = 2;
+      const secondFrameId = `frame-${secondFrameIdNumber}`;
+      const addAction = { type: ADD_FRAME, payload: { frameId: secondFrameIdNumber } };
+      const stateAfterAdd = frameListReducer(startState, addAction);
+
+      const moveAction = {
+        type: MOVE_FRAME,
+        payload: {
+          source: stateAfterAdd.frames.indexOf(secondFrameId),
+          destination: stateAfterAdd.frames.indexOf(firstFrameId),
+        },
+      };
+      const resultState = {
+        frames: [secondFrameId, firstFrameId],
+      };
+
+      expect(frameListReducer(stateAfterAdd, moveAction)).toEqual(resultState);
+    }
   });
 
   it('return current state if action type not tracked', () => {
