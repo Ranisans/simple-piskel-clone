@@ -12,6 +12,10 @@ class PreviewLogic {
     this.canvas.height = this.canvasSize;
     this.context.imageSmoothingEnabled = false;
   }
+
+  setFullscreen() {
+    this.canvas.requestFullscreen();
+  }
 }
 
 export default PreviewLogic;

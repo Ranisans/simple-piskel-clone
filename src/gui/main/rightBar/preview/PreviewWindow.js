@@ -7,6 +7,7 @@ const PreviewWindow = () => {
   const previewSize = 200;
   const previewId = 'preview_window';
   const [previewLogic] = useState(new PreviewLogic());
+  const [fps, setFps] = useState(1);
 
   const canvasState = useSelector((state) => state.canvas);
 
@@ -30,6 +31,15 @@ const PreviewWindow = () => {
           width={previewSize}
           height={previewSize}
         ></canvas>
+      </div>
+      <div className="preview_actions">
+        <div className="preview_actions-fullscreen" onClick={() => { previewLogic.setFullscreen(); }}></div>
+        <p>{`${fps} fps`}</p>
+        <input
+          type="range" name="fps" id="fps" className="preview_actions-fps"
+          min="1" max="24" step="1"
+          value={fps}
+          onChange={(e) => { setFps(e.target.value); }} />
       </div>
     </div>
   );

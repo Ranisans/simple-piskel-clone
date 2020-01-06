@@ -1,5 +1,6 @@
 @import 'constants';
 @import 'resolutionMenu';
+@import 'previewBlock';
 
 .right_bar {
   float: right;
@@ -10,12 +11,4 @@
   background-color: #1d1d1d;
 
   grid-column: 3;
-}
-
-
-.preview_canvas_container {
-  position: relative;
-  width: $RightBarElWidth;
-  height: 200px;
-  margin: 5px auto;
 }
