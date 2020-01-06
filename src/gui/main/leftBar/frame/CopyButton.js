@@ -8,8 +8,9 @@ const CopyButton = ({ frameId }) => {
   const dispatch = useDispatch();
 
   const pushHandle = (e) => {
-    e.preventDefault();
     dispatch(addFrame({ frameId: uuid(), parentFrame: frameId }));
+    e.preventDefault();
+    e.stopPropagation();
   };
 
   return (

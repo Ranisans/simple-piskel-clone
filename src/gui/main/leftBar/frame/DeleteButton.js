@@ -7,8 +7,9 @@ const DeleteButton = ({ frameId }) => {
   const dispatch = useDispatch();
 
   const pushHandle = (e) => {
-    e.preventDefault();
     dispatch(removeFrame({ frameId }));
+    e.preventDefault();
+    e.stopPropagation();
   };
 
   return (
