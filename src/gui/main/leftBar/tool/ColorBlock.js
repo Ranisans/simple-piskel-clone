@@ -1,10 +1,18 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import ColorButton from './ColorButton';
 import { colorsElements } from '../../../../actions/colorAction';
+import { exchangeColors } from '../../../../actions/colorPickerAction';
 
 const ColorBlock = () => {
   const colorBlockCls = 'color_block';
+  const dispatch = useDispatch();
+
+
+  const colorExchangeHandler = () => {
+    dispatch(exchangeColors());
+  };
 
   return (
     <div className={colorBlockCls}>
@@ -15,7 +23,7 @@ const ColorBlock = () => {
           colorName={el.className}
         />
       ))}
-      <div className={`${colorBlockCls}-switch`}></div>
+      <div className={`${colorBlockCls}-switch`} onClick={colorExchangeHandler}></div>
     </div>
   );
 };
