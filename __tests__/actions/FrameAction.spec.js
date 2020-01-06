@@ -1,30 +1,30 @@
 import * as c from '../../src/actions/frameAction';
 
 describe('frameAction tests', () => {
-  it('add frame without imageData', () => {
-    const [frameId, position] = ['frame-2', 2];
-    const data = c.addFrame({ frameId, position });
+  it('add frame without imageData and with parent frame id', () => {
+    const [frameId, parentFrame] = ['frame-2', 'frame-1'];
+    const data = c.addFrame({ frameId, parentFrame });
     expect(data.type).toEqual(c.ADD_FRAME);
     expect(data.payload.frameId).toEqual(frameId);
-    expect(data.payload.position).toEqual(position);
+    expect(data.payload.parentFrame).toEqual(parentFrame);
     expect(data.payload.imageData).toEqual(null);
   });
 
-  it('add frame without position', () => {
+  it('add frame without parent frame id and imageData', () => {
     const frameId = 'frame-2';
     const data = c.addFrame({ frameId });
     expect(data.type).toEqual(c.ADD_FRAME);
     expect(data.payload.frameId).toEqual(frameId);
-    expect(data.payload.position).toEqual(-1);
+    expect(data.payload.parentFrame).toEqual(null);
     expect(data.payload.imageData).toEqual(null);
   });
 
-  it('add frame without imageData', () => {
-    const [frameId, position, imageData] = ['frame-2', 2, 'someImageData'];
-    const data = c.addFrame({ frameId, position, imageData });
+  it('add frame with imageData and parent frame id', () => {
+    const [frameId, parentFrame, imageData] = ['frame-2', 'frame-1', 'someImageData'];
+    const data = c.addFrame({ frameId, parentFrame, imageData });
     expect(data.type).toEqual(c.ADD_FRAME);
     expect(data.payload.frameId).toEqual(frameId);
-    expect(data.payload.position).toEqual(position);
+    expect(data.payload.parentFrame).toEqual(parentFrame);
     expect(data.payload.imageData).toEqual(imageData);
   });
 
