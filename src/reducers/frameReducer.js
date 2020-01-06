@@ -24,6 +24,8 @@ export const frameReducer = (state = initialState, action) => {
             frameId,
             imageData,
           },
+          activeFrame: frameId,
+          activeImageData: imageData,
         };
       } return state;
     }
