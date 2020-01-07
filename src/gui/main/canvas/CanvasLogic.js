@@ -1,10 +1,11 @@
 import { mainCanvasClass } from '../../../actions/canvasAction';
-import DrawingCanvas from './DrawingCanvas';
 import { toolBtn } from '../../../actions/toolActionTypes';
 import { eraserColor, colorsElements } from '../../../actions/colorAction';
+import CanvasLogicAbstract from './CanvasLogicAbstract';
 
-class CanvasLogic {
+class CanvasLogic extends CanvasLogicAbstract {
   constructor({ pipetteCallback, frameUpdateCallback }) {
+    super();
     this.pipetteCallback = pipetteCallback;
     this.frameUpdateCallback = frameUpdateCallback;
   }
@@ -12,40 +13,19 @@ class CanvasLogic {
   initialize() {
     this.canvasObject = document.querySelector(`.${mainCanvasClass}`);
     this.context = this.canvasObject.getContext('2d');
-    this.DrawingCanvas = new DrawingCanvas(this.context);
-    this.LEFT_BUTTON = 0;
-    this.RIGHT_BUTTON = 2;
+    super.initialize();
 
     this._drawInitialization();
   }
 
   setPixelSize(penSize) {
-    this.pixelSize = penSize;
-    this.DrawingCanvas.setPixelSize(this.pixelSize);
-  }
-
-  settCanvasBoxSize(boxSize) {
-    this.canvasBoxSize = boxSize;
-    this.canvasProportion = this.canvasSize / this.canvasBoxSize;
+    super.setPixelSize(penSize);
+    this.DrawingCanvas.setPixelSize(penSize);
   }
 
   setCanvasSize(canvasSize) {
-    if (this.canvasSize !== canvasSize) {
-      this.canvasProportion = canvasSize / this.canvasBoxSize;
-      this.canvasSize = canvasSize;
-      this.canvasObject.width = canvasSize;
-      this.canvasObject.height = canvasSize;
-      this.DrawingCanvas.setCanvasSize(canvasSize);
-      this.context.imageSmoothingEnabled = false;
-    }
-  }
-
-  setTool(tool) {
-    this.currentTool = tool;
-  }
-
-  setColors(colors) {
-    this.colors = colors;
+    super.setCanvasSize(canvasSize);
+    this.DrawingCanvas.setCanvasSize(canvasSize);
   }
 
   clear() {
@@ -58,6 +38,13 @@ class CanvasLogic {
     } else {
       this.clear();
     }
+  }
+
+  drawLine({ line, color }) {
+    this.DrawingCanvas.drawWithBresenhamAlgorithm(
+      line.startX, line.startY, line.endX, line.endY,
+      [color.r, color.g, color.b, color.a],
+    );
   }
 
   _drawInitialization() {
@@ -74,7 +61,6 @@ class CanvasLogic {
     let colorName;
 
     const draw = (e) => {
-      e.preventDefault();
       if (!isDrawing) { return; }
 
       const offsetX = Math.floor(e.offsetX * this.canvasProportion);
