@@ -6,7 +6,12 @@ export const loadStorage = () => {
     if (serializedState === null) {
       return undefined;
     }
-    return JSON.parse(serializedState);
+    const state = JSON.parse(serializedState);
+    const primaryColor = state.color.primary;
+    const secondaryColor = state.color.secondary;
+    state.colorPicker.primaryPicker = primaryColor;
+    state.colorPicker.secondaryPicker = secondaryColor;
+    return state;
   } catch (e) {
     return undefined;
   }
