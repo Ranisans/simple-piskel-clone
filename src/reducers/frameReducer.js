@@ -25,7 +25,6 @@ export const frameReducer = (state = initialState, action) => {
             imageData,
           },
           activeFrame: frameId,
-          activeImageData: imageData,
         };
       } return state;
     }
@@ -50,7 +49,6 @@ export const frameReducer = (state = initialState, action) => {
         return {
           ...state,
           activeFrame: action.payload.frameId,
-          activeImageData: state[action.payload.frameId].imageData,
         };
       } return state;
     }

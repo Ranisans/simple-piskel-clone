@@ -93,9 +93,9 @@ const Canvas = () => {
     strokeLogic.setColors(colorsState);
   }, [colorsState]);
 
-  // didUpdate activeImageData
+  // didUpdate activeFrame
   useEffect(() => {
-    canvasLogic.setImageData(frameState.activeImageData);
+    canvasLogic.setImageData(frameState[frameState.activeFrame].imageData);
   }, [frameState.activeFrame]);
 
   return (

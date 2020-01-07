@@ -14,7 +14,6 @@ const testsBlock = (startState) => {
       ...startState,
       [`frame-${frameId}`]: { frameId: `frame-${frameId}`, imageData: null },
       activeFrame: 'frame-2',
-      activeImageData: null,
     };
 
     expect(frameReducer(startState, action)).toEqual(nextState);
@@ -32,7 +31,6 @@ const testsBlock = (startState) => {
           imageData: startState['frame-1'].imageData,
         },
         activeFrame: 'frame-2',
-        activeImageData: startState['frame-1'].imageData,
       };
       expect(frameReducer(startState, action)).toEqual(nextState);
     } else {
@@ -43,7 +41,6 @@ const testsBlock = (startState) => {
           imageData: null,
         },
         activeFrame: 'frame-2',
-        activeImageData: null,
       };
       expect(frameReducer(startState, action)).toEqual(nextState);
     }
@@ -91,7 +88,6 @@ const testsBlock = (startState) => {
           imageData: stateAfterUpdate['frame-2'].imageData,
         },
         activeFrame: 'frame-2',
-        activeImageData: null,
       };
       expect(frameReducer(stateAfterUpdate, removeAction)).toEqual(stateAfterRemove);
     }
@@ -111,7 +107,6 @@ const testsBlock = (startState) => {
       const resultState = {
         ...stateAfterAdd,
         activeFrame: secondFrameId,
-        activeImageData: startState['frame-1'].imageData,
       };
 
       expect(frameReducer(stateAfterAdd, setActiveFrameAction)).toEqual(resultState);
