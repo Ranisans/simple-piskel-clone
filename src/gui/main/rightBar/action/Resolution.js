@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { changeCanvasSize } from '../../../../actions/canvasAction';
 
 
@@ -7,7 +7,10 @@ const Resolution = () => {
   const dispatch = useDispatch();
 
   const canvasResolutions = [32, 64, 128];
-  const [resolution, setResolution] = useState(canvasResolutions[0]);
+
+  const canvasState = useSelector((state) => state.canvas);
+
+  const [resolution, setResolution] = useState(canvasState.size);
 
   const menuClass = 'resolution_menu';
 
