@@ -1,18 +1,23 @@
 import convertLocalStorageCanvas from '../../../../logic/convertLocalStorageCanvas';
+import CanvasAbstract from '../../CanvasAbstract';
 
-class FrameLogic {
-  initialize(frameId, canvasBoxSize) {
-    this.canvas = document.querySelector(`#${frameId}`);
-    this.canvas.width = canvasBoxSize;
-    this.canvas.height = canvasBoxSize;
-    this.context = this.canvas.getContext('2d');
+class FrameLogic extends CanvasAbstract {
+  constructor({ updateFrameDataAfterResize }) {
+    super();
+    this.updateFrameDataAfterResize = updateFrameDataAfterResize;
   }
 
-  setSize(size) {
-    this.canvasSize = size;
-    this.canvas.width = this.canvasSize;
-    this.canvas.height = this.canvasSize;
-    this.context.imageSmoothingEnabled = false;
+  initialize(frameId, canvasBoxSize) {
+    this.canvasObject = document.querySelector(`#${frameId}`);
+    this.canvasObject.width = canvasBoxSize;
+    this.canvasObject.height = canvasBoxSize;
+    this.context = this.canvasObject.getContext('2d');
+  }
+
+  async setCanvasSize(size) {
+    await super.setCanvasSize(size);
+    const imageData = this.context.getImageData(0, 0, this.canvasSize, this.canvasSize);
+    this.updateFrameDataAfterResize(imageData);
   }
 
   setImage(imageData) {

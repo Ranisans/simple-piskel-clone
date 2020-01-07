@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Draggable } from 'react-beautiful-dnd';
 
-import { activateFrame } from '../../../../actions/frameAction';
+import { activateFrame, updateFrameById } from '../../../../actions/frameAction';
 import FrameLogic from './FrameLogic';
 import CopyButton from './CopyButton';
 import DeleteButton from './DeleteButton';
@@ -14,9 +14,13 @@ const Frame = ({ frameId, index }) => {
   const frameData = useSelector((state) => state.frame);
   const canvasData = useSelector((state) => state.canvas);
 
-  const [frameLogic] = useState(new FrameLogic());
-
   const dispatch = useDispatch();
+  const updateFrameDataAfterResize = (imageData) => {
+    dispatch(updateFrameById({ frameId, imageData }));
+  };
+
+  const [frameLogic] = useState(new FrameLogic({ updateFrameDataAfterResize }));
+
 
   // didMount
   useEffect(() => {
@@ -25,7 +29,7 @@ const Frame = ({ frameId, index }) => {
 
   // didUpdate size of canvas
   useEffect(() => {
-    frameLogic.setSize(canvasData.size);
+    frameLogic.setCanvasSize(canvasData.size);
   }, [canvasData.size]);
 
   // didUpdate if set imageData

@@ -1,6 +1,7 @@
 import DrawingCanvas from './DrawingCanvas';
+import CanvasAbstract from '../CanvasAbstract';
 
-class CanvasLogicAbstract {
+class CanvasLogicAbstract extends CanvasAbstract {
   initialize() {
     this.DrawingCanvas = new DrawingCanvas(this.context);
   }
@@ -19,12 +20,9 @@ class CanvasLogicAbstract {
 
   setCanvasSize(canvasSize) {
     if (this.canvasSize !== canvasSize) {
+      super.setCanvasSize(canvasSize);
       this.canvasProportion = canvasSize / this.canvasBoxSize;
-      this.canvasSize = canvasSize;
-      this.canvasObject.width = canvasSize;
-      this.canvasObject.height = canvasSize;
       this.DrawingCanvas.setCanvasSize(canvasSize);
-      this.context.imageSmoothingEnabled = false;
     }
   }
 
