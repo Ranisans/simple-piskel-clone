@@ -3,6 +3,7 @@ import {
   UPDATE_FRAME,
   REMOVE_FRAME,
   ACTIVATE_FRAME,
+  UPDATE_FRAME_BY_ID,
 } from '../actions/frameAction';
 
 export const initialState = {};
@@ -38,6 +39,20 @@ export const frameReducer = (state = initialState, action) => {
           },
         };
       } return state;
+    }
+    case UPDATE_FRAME_BY_ID: {
+      const { frameId } = action.payload;
+      const { imageData } = action.payload;
+      if (state[frameId]) {
+        return {
+          ...state,
+          [frameId]: {
+            ...state[frameId],
+            imageData,
+          },
+        };
+      }
+      return state;
     }
     case REMOVE_FRAME: {
       const { frameId } = action.payload;

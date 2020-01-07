@@ -3,6 +3,7 @@ import {
   UPDATE_FRAME,
   REMOVE_FRAME,
   ACTIVATE_FRAME,
+  UPDATE_FRAME_BY_ID,
 } from '../../src/actions/frameAction';
 import { frameReducer } from '../../src/reducers/frameReducer';
 
@@ -62,6 +63,36 @@ const testsBlock = (startState) => {
     } else {
       expect(frameReducer(activatedFrameState, setUpdateFrame)).toEqual({});
     }
+  });
+
+  it('update frame by id', () => {
+    const [secondFrameIdNumber, parentFrame] = [2, 'frame-1'];
+    const secondFrameId = `frame-${secondFrameIdNumber}`;
+    const addAction = {
+      type: ADD_FRAME,
+      payload: { frameId: secondFrameIdNumber, parentFrame },
+    };
+    const stateAfterAdd = frameReducer(startState, addAction);
+
+    const imageData = 'someImageData';
+
+    const updateAction = {
+      type: UPDATE_FRAME_BY_ID,
+      payload: {
+        frameId: secondFrameId,
+        imageData,
+      },
+    };
+
+    const finalState = {
+      ...stateAfterAdd,
+      [secondFrameId]: {
+        ...stateAfterAdd[secondFrameId],
+        imageData,
+      },
+    };
+
+    expect(frameReducer(stateAfterAdd, updateAction)).toEqual(finalState);
   });
 
   it('remove added frame', () => {
@@ -132,8 +163,8 @@ describe('frameReducer tests', () => {
     testsBlock(testState);
   });
 
-  // describe('without state in reducer', () => {
-  //   const startState = undefined;
-  //   testsBlock(startState);
-  // });
+  describe('without state in reducer', () => {
+    const startState = undefined;
+    testsBlock(startState);
+  });
 });
