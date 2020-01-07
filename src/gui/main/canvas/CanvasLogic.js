@@ -2,6 +2,7 @@ import { mainCanvasClass } from '../../../actions/canvasAction';
 import { toolBtn } from '../../../actions/toolActionTypes';
 import { eraserColor, colorsElements } from '../../../actions/colorAction';
 import CanvasLogicAbstract from './CanvasLogicAbstract';
+import convertLocalStorageCanvas from '../../../logic/convertLocalStorageCanvas';
 
 class CanvasLogic extends CanvasLogicAbstract {
   constructor({ pipetteCallback, frameUpdateCallback }) {
@@ -34,7 +35,7 @@ class CanvasLogic extends CanvasLogicAbstract {
 
   setImageData(imageData) {
     if (imageData) {
-      this.context.putImageData(imageData, 0, 0);
+      this.context.putImageData(convertLocalStorageCanvas(imageData, this.canvasSize), 0, 0);
     } else {
       this.clear();
     }

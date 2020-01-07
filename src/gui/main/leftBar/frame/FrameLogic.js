@@ -1,3 +1,5 @@
+import convertLocalStorageCanvas from '../../../../logic/convertLocalStorageCanvas';
+
 class FrameLogic {
   initialize(frameId, canvasBoxSize) {
     this.canvas = document.querySelector(`#${frameId}`);
@@ -15,7 +17,7 @@ class FrameLogic {
 
   setImage(imageData) {
     if (imageData) {
-      this.context.putImageData(imageData, 0, 0);
+      this.context.putImageData(convertLocalStorageCanvas(imageData, this.canvasSize), 0, 0);
     } else {
       this.context.clearRect(0, 0, this.canvasSize, this.canvasSize);
     }
