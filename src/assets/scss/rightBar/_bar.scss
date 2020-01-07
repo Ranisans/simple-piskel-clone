@@ -12,3 +12,21 @@
 
   grid-column: 3;
 }
+
+.export_to_apng {
+  display: block;
+  width: $RightBarElWidth;
+  margin: 5px auto;
+  border: 1px solid grey;
+  border-radius: 3px;
+  color: white;
+  background-color: #1d1d1d;
+
+  &:hover {
+    border-color: rgb(247, 230, 0);
+  }
+
+  &:active {
+    border-color: rgb(186, 228, 107);
+  }
+}
