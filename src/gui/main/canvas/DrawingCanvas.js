@@ -104,6 +104,25 @@ class DrawingCanvas {
       pixelSize: this.pixelSize, size: this.size, x, y, bucketColor,
     });
   }
+
+  colorSwap(mainX, mainY, color) {
+    const mainColor = this.getPixelColor(mainX, mainY);
+    const imageData = this.context.getImageData(0, 0, this.size, this.size);
+    const pixelData = imageData.data;
+
+    for (let i = 0; i < pixelData.length; i += 4) {
+      if (
+        pixelData[i] === mainColor.r
+        && pixelData[i + 1] === mainColor.g
+        && pixelData[i + 2] === mainColor.b
+        && pixelData[i + 3] === mainColor.a
+      ) {
+        [pixelData[i], pixelData[i + 1], pixelData[i + 2], pixelData[i + 3]] = color;
+      }
+    }
+
+    this.context.putImageData(imageData, 0, 0);
+  }
 }
 
 export default DrawingCanvas;

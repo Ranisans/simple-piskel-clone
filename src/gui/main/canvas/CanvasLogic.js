@@ -74,6 +74,9 @@ class CanvasLogic extends CanvasLogicAbstract {
       }
       if (this.currentTool === toolBtn.bucket) {
         this.DrawingCanvas.fillArea(offsetX, offsetY, color);
+      } else if (this.currentTool === toolBtn.colorswap) {
+        this.DrawingCanvas.colorSwap(offsetX, offsetY,
+          [color.r, color.g, color.b, color.a]);
       } else if (offsetX !== latestX || offsetY !== latestY) {
         if (latestX === -1) {
           this.DrawingCanvas.drawRect(
