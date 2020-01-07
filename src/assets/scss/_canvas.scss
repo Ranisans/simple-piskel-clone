@@ -12,6 +12,17 @@
   image-rendering: pixelated;
 }
 
+.additional_canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+
+  &--hidden{
+    display: none;
+  }
+}
+
 .canvas_background {
   position: absolute;
   top: 0;

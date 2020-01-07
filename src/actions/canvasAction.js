@@ -1,4 +1,5 @@
 export const mainCanvasClass = 'main_canvas';
+export const additionalCanvasClass = 'additional_canvas';
 
 export const canvasSizes = [32, 64, 128];
 
