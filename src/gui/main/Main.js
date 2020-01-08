@@ -27,6 +27,12 @@ const Main = () => {
     copyButton.click();
   };
 
+  const deleteActiveFrame = () => {
+    const activeFrame = document.querySelector('.preview_tile--active');
+    const deleteButton = activeFrame.querySelector('.delete_frame');
+    deleteButton.click();
+  };
+
   const resizeWindow = () => {
     if (mainHeight === 0) {
       mainCanvasBlock = document.querySelector('.main_canvas_block');
@@ -75,6 +81,9 @@ const Main = () => {
         return;
       case shortcuts.copyActiveFrame:
         copyActiveFrame();
+        return;
+      case shortcuts.deleteActiveFrame:
+        deleteActiveFrame();
         return;
       default:
         return;

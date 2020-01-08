@@ -7,6 +7,7 @@ export const shortcuts = {
   colorswap: 'w',
   addFrame: 'N',
   copyActiveFrame: 'C',
+  deleteActiveFrame: 'D',
 };
 
 export const changeShortcut = (key, value) => {
