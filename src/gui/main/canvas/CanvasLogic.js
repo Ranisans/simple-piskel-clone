@@ -46,6 +46,9 @@ class CanvasLogic extends CanvasLogicAbstract {
       line.startX, line.startY, line.endX, line.endY,
       [color.r, color.g, color.b, color.a],
     );
+
+    const imageData = this.context.getImageData(0, 0, this.canvasSize, this.canvasSize);
+    this.frameUpdateCallback(imageData);
   }
 
   _drawInitialization() {
@@ -94,7 +97,6 @@ class CanvasLogic extends CanvasLogicAbstract {
         latestX = offsetX;
         latestY = offsetY;
       }
-
 
       const imageData = this.context.getImageData(0, 0, this.canvasSize, this.canvasSize);
       this.frameUpdateCallback(imageData);
