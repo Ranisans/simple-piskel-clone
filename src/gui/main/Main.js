@@ -7,6 +7,7 @@ import Canvas from './canvas/Canvas';
 import { changeCanvasBoxSize } from '../../actions/canvasAction';
 import { toolBtn } from '../../actions/toolActionTypes';
 import changeTool from '../../actions/toolAction';
+import { shortcuts } from '../../logic/shortcuts';
 
 const Main = () => {
   let mainHeight = 0;
@@ -39,20 +40,23 @@ const Main = () => {
     const { key } = e;
     let tool;
     switch (key) {
-      case 'p':
+      case shortcuts.pen:
         tool = toolBtn.pen;
         break;
-      case 'c':
+      case shortcuts.pipette:
         tool = toolBtn.pipette;
         break;
-      case 'b':
+      case shortcuts.bucket:
         tool = toolBtn.bucket;
         break;
-      case 'e':
+      case shortcuts.eraser:
         tool = toolBtn.eraser;
         break;
-      case 's':
+      case shortcuts.stroke:
         tool = toolBtn.stroke;
+        break;
+      case shortcuts.colorswap:
+        tool = toolBtn.colorswap;
         break;
       default:
         return;

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import changeTool from '../../../../actions/toolAction';
+import { shortcuts } from '../../../../logic/shortcuts';
 
 const ToolButton = ({ className, toolName, activeBtnClass }) => {
   const currentTool = useSelector((state) => state.tools);
@@ -18,6 +19,7 @@ const ToolButton = ({ className, toolName, activeBtnClass }) => {
       toolName === currentTool.tool ? activeBtnClass : null,
     ].join(' ')}
       onClick={onClickHandler}
+      title={`${toolName}: ${shortcuts[toolName]}`}
     ></div>
   );
 };
