@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = (env, args) => {
   const config = {
@@ -81,6 +82,10 @@ module.exports = (env, args) => {
         template: 'src/index.html',
         filename: 'index.html',
       }),
+      new CopyPlugin([{
+        from: './node_modules/gif.js-upgrade/dist/gif.worker.js',
+        to: path.resolve(__dirname, './dist'),
+      }]),
       new webpack.LoaderOptionsPlugin({
         test: /\.js$/,
         options: {

@@ -33,8 +33,13 @@ const Main = () => {
     deleteButton.click();
   };
 
-  const exportAnimation = () => {
+  const exportAnimationToAPNG = () => {
     const exportButton = document.querySelector('.export_to_apng');
+    exportButton.click();
+  };
+
+  const exportAnimationToGIF = () => {
+    const exportButton = document.querySelector('.export_to_gif');
     exportButton.click();
   };
 
@@ -90,8 +95,11 @@ const Main = () => {
       case shortcuts.deleteActiveFrame:
         deleteActiveFrame();
         return;
-      case shortcuts.export:
-        exportAnimation();
+      case shortcuts.exportAPNG:
+        exportAnimationToAPNG();
+        return;
+      case shortcuts.exportGIF:
+        exportAnimationToGIF();
         return;
       default:
         return;

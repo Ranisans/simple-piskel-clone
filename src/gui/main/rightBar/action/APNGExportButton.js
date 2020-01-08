@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-// import UPNG from 'upng-js';
 import download from 'downloadjs';
 import { shortcuts } from '../../../../logic/shortcuts';
 
@@ -37,9 +36,9 @@ const APNGExportButton = () => {
 
   return (
     <button
-      className='export_to_apng'
+      className='export_to_apng export_animation'
       onClick={exportHandler}
-      title={`shortcut: ${shortcuts.export}`}
+      title={`shortcut: ${shortcuts.exportAPNG}`}
     >Export to APNG</button>
   );
 };

@@ -60,6 +60,8 @@ typings/
 # next.js build output
 .next
 
+# npm build
+dist/
 
 # my rules
 package-lock.json

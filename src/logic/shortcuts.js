@@ -8,7 +8,8 @@ export const shortcuts = {
   addFrame: 'N',
   copyActiveFrame: 'C',
   deleteActiveFrame: 'D',
-  export: 'E',
+  exportAPNG: 'A',
+  exportGIF: 'G',
 };
 
 export const changeShortcut = (key, value) => {
