@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Label from './Label';
-import CreateSpriteButton from './CreateSpriteButton';
+import ClearButton from './ClearButton';
 import SignInButton from './SigtInButton';
 
 const Menu = () => (
@@ -9,7 +9,7 @@ const Menu = () => (
     <h2 className="section_label">Main Menu</h2>
     <h3 className="main_menu-label">Simple Piskel Clone</h3>
     <Label />
-    <CreateSpriteButton />
+    <ClearButton />
     <SignInButton />
   </section>
 );
