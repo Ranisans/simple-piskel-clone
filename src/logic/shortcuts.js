@@ -10,6 +10,7 @@ export const shortcuts = {
   deleteActiveFrame: 'D',
   exportAPNG: 'A',
   exportGIF: 'G',
+  fullscreenPreview: 'F',
 };
 
 export const changeShortcut = (key, value) => {

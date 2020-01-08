@@ -43,6 +43,11 @@ const Main = () => {
     exportButton.click();
   };
 
+  const setFullscreenPreviewWindow = () => {
+    const fullscreenButton = document.querySelector('.preview_actions-fullscreen');
+    fullscreenButton.click();
+  };
+
   const resizeWindow = () => {
     if (mainHeight === 0) {
       mainCanvasBlock = document.querySelector('.main_canvas_block');
@@ -100,6 +105,9 @@ const Main = () => {
         return;
       case shortcuts.exportGIF:
         exportAnimationToGIF();
+        return;
+      case shortcuts.fullscreenPreview:
+        setFullscreenPreviewWindow();
         return;
       default:
         return;
