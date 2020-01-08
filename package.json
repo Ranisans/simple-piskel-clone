@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "downloadjs": "^1.4.7",
+    "firebase": "^7.6.1",
     "prettier": "^1.19.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
