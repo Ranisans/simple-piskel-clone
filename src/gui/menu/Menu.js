@@ -1,27 +1,17 @@
 import React from 'react';
 
 import Label from './Label';
-import Button from './Button';
+import CreateSpriteButton from './CreateSpriteButton';
+import SignInButton from './SigtInButton';
 
-const Menu = () => {
-  const buttons = [
-    { className: 'create_sprite', value: 'Create Sprite' },
-    { className: 'login_btn', value: 'SignIn' },
-  ];
-  return (
-    <section className="main_menu">
-      <h2 className="section_label">Main Menu</h2>
-      <h3 className="main_menu-label">Simple Piskel Clone</h3>
-      <Label />
-      {buttons.map((el, i) => (
-        <Button
-          key={i}
-          className={el.className}
-          value={el.value}
-        />
-      ))}
-    </section>
-  );
-};
+const Menu = () => (
+  <section className="main_menu">
+    <h2 className="section_label">Main Menu</h2>
+    <h3 className="main_menu-label">Simple Piskel Clone</h3>
+    <Label />
+    <CreateSpriteButton />
+    <SignInButton />
+  </section>
+);
 
 export default Menu;
