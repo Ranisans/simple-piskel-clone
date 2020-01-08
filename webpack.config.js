@@ -5,6 +5,8 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+
 
 module.exports = (env, args) => {
   const config = {
@@ -86,6 +88,12 @@ module.exports = (env, args) => {
         from: './node_modules/gif.js-upgrade/dist/gif.worker.js',
         to: path.resolve(__dirname, './dist'),
       }]),
+      new FaviconsWebpackPlugin({
+        logo: './public/sunny.png',
+        cache: true,
+        mode: 'light',
+        inject: true,
+      }),
       new webpack.LoaderOptionsPlugin({
         test: /\.js$/,
         options: {
