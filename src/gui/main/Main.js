@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import uuid from 'uuid-random';
 
 import LeftBar from './leftBar/LeftBar';
 import RightBar from './rightBar/RightBar';
@@ -8,12 +9,17 @@ import { changeCanvasBoxSize } from '../../actions/canvasAction';
 import { toolBtn } from '../../actions/toolActionTypes';
 import changeTool from '../../actions/toolAction';
 import { shortcuts } from '../../logic/shortcuts';
+import { addFrame } from '../../actions/frameAction';
 
 const Main = () => {
   let mainHeight = 0;
   let mainCanvasBlock;
   let mainCanvasContainer;
   const dispatch = useDispatch();
+
+  const addCleanFrame = () => {
+    dispatch(addFrame({ frameId: uuid() }));
+  };
 
   const resizeWindow = () => {
     if (mainHeight === 0) {
@@ -58,6 +64,9 @@ const Main = () => {
       case shortcuts.colorswap:
         tool = toolBtn.colorswap;
         break;
+      case shortcuts.addFrame:
+        addCleanFrame();
+        return;
       default:
         return;
     }
