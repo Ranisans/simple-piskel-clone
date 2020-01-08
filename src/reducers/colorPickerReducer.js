@@ -2,12 +2,12 @@ import { colorsElements } from '../actions/colorAction';
 import * as ACTIONS from '../actions/colorPickerAction';
 
 
-export const initState = {
+export const initialState = {
   primaryPicker: colorsElements[0].baseColor,
   secondaryPicker: colorsElements[1].baseColor,
 };
 
-export const colorPickerReducer = (state = initState, action) => {
+export const colorPickerReducer = (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.CHANGE_PRIMARY_PICKER_COLOR:
       return {

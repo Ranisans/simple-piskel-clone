@@ -1,11 +1,11 @@
 import * as ACTIONS from '../actions/colorAction';
 
-export const initState = {
+export const initialState = {
   primary: ACTIONS.colorsElements[0].baseColor,
   secondary: ACTIONS.colorsElements[1].baseColor,
 };
 
-export const colorChangeReducer = (state = initState, action) => {
+export const colorChangeReducer = (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.CHANGE_PRIMARY_COLOR:
       return {
