@@ -57,6 +57,14 @@ export const frameReducer = (state = initialState, action) => {
     case REMOVE_FRAME: {
       const { frameId } = action.payload;
       const { [frameId]: discard, ...newState } = state;
+      if (frameId === state.activeFrame) {
+        const keys = Object.keys(newState);
+        const index = keys.indexOf('activeFrame');
+        if (index !== -1) keys.splice(index, 1);
+        if (keys.length > 0) {
+          [newState.activeFrame] = keys;
+        }
+      }
       return newState;
     }
     case ACTIVATE_FRAME: {
