@@ -1,26 +1,21 @@
 class CanvasAbstract {
-  async setCanvasSize(canvasSize) {
-    if (this.canvasSize !== canvasSize) {
-      const oldCanvasSize = this.canvasSize;
-      const dataURL = this.canvasObject.toDataURL();
-      this.canvasSize = canvasSize;
-      this.canvasObject.width = this.canvasSize;
-      this.canvasObject.height = this.canvasSize;
-      this.context.imageSmoothingEnabled = false;
-      if (dataURL !== null) {
-        return new Promise((resolve) => {
-          const image = new Image();
+  setCanvasSize(canvasSize) {
+    if (this.canvasSize) {
+      const oldImageData = this.context.getImageData(0, 0, this.canvasSize, this.canvasSize);
 
-          image.addEventListener('load', () => {
-            const size = Math.min(oldCanvasSize, canvasSize);
-            resolve(this.context.drawImage(image, 0, 0, size, size));
-          });
-          image.src = dataURL;
-        });
-      }
-      return new Promise();
+      this._setCanvasSize(canvasSize);
+
+      this.context.putImageData(oldImageData, 0, 0);
+    } else {
+      this._setCanvasSize(canvasSize);
     }
-    return new Promise();
+  }
+
+  _setCanvasSize(canvasSize) {
+    this.canvasSize = canvasSize;
+    this.canvasObject.width = this.canvasSize;
+    this.canvasObject.height = this.canvasSize;
+    this.context.imageSmoothingEnabled = false;
   }
 }
 
