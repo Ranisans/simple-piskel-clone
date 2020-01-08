@@ -1,6 +1,7 @@
 class CanvasAbstract {
   async setCanvasSize(canvasSize) {
     if (this.canvasSize !== canvasSize) {
+      const oldCanvasSize = this.canvasSize;
       const dataURL = this.canvasObject.toDataURL();
       this.canvasSize = canvasSize;
       this.canvasObject.width = this.canvasSize;
@@ -11,7 +12,8 @@ class CanvasAbstract {
           const image = new Image();
 
           image.addEventListener('load', () => {
-            resolve(this.context.drawImage(image, 0, 0, this.canvasSize, this.canvasSize));
+            const size = Math.min(oldCanvasSize, canvasSize);
+            resolve(this.context.drawImage(image, 0, 0, size, size));
           });
           image.src = dataURL;
         });
