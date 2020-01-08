@@ -5,7 +5,8 @@ export const shortcuts = {
   eraser: 'e',
   stroke: 's',
   colorswap: 'w',
-  addFrame: 'n',
+  addFrame: 'N',
+  copyActiveFrame: 'C',
 };
 
 export const changeShortcut = (key, value) => {

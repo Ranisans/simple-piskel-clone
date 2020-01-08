@@ -21,6 +21,12 @@ const Main = () => {
     dispatch(addFrame({ frameId: uuid() }));
   };
 
+  const copyActiveFrame = () => {
+    const activeFrame = document.querySelector('.preview_tile--active');
+    const copyButton = activeFrame.querySelector('.copy_frame');
+    copyButton.click();
+  };
+
   const resizeWindow = () => {
     if (mainHeight === 0) {
       mainCanvasBlock = document.querySelector('.main_canvas_block');
@@ -66,6 +72,9 @@ const Main = () => {
         break;
       case shortcuts.addFrame:
         addCleanFrame();
+        return;
+      case shortcuts.copyActiveFrame:
+        copyActiveFrame();
         return;
       default:
         return;

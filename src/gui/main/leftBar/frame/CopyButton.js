@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import uuid from 'uuid-random';
 
 import { addFrame } from '../../../../actions/frameAction';
+import { shortcuts } from '../../../../logic/shortcuts';
 
 const CopyButton = ({ frameId }) => {
   const dispatch = useDispatch();
@@ -14,7 +15,11 @@ const CopyButton = ({ frameId }) => {
   };
 
   return (
-    <div className="copy_frame frame_button" onClick={pushHandle}></div>
+    <div
+      className="copy_frame frame_button"
+      onClick={pushHandle}
+      title={`shortcut: ${shortcuts.copyActiveFrame}`}
+    ></div>
   );
 };
 
