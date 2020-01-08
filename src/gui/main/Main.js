@@ -33,6 +33,11 @@ const Main = () => {
     deleteButton.click();
   };
 
+  const exportAnimation = () => {
+    const exportButton = document.querySelector('.export_to_apng');
+    exportButton.click();
+  };
+
   const resizeWindow = () => {
     if (mainHeight === 0) {
       mainCanvasBlock = document.querySelector('.main_canvas_block');
@@ -84,6 +89,9 @@ const Main = () => {
         return;
       case shortcuts.deleteActiveFrame:
         deleteActiveFrame();
+        return;
+      case shortcuts.export:
+        exportAnimation();
         return;
       default:
         return;
