@@ -6,7 +6,7 @@ import { shortcuts } from '../../../../logic/shortcuts';
 
 const UPNG = require('upng-js');
 
-const ExportButton = () => {
+const APNGExportButton = () => {
   const frameState = useSelector((state) => state.frame);
   const frameListState = useSelector((state) => state.frameList);
   const canvasState = useSelector((state) => state.canvas);
@@ -44,4 +44,4 @@ const ExportButton = () => {
   );
 };
 
-export default ExportButton;
+export default APNGExportButton;
