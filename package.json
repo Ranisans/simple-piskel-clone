@@ -12,6 +12,7 @@
     "build": "npm run clear -s && webpack --progress --mode production",
     "lint": "eslint ./src",
     "test": "jest --coverage",
+    "test:coverage": "jest --coverage --coverage-reporters=lcov",
     "test:watch": "jest --watch"
   },
   "dependencies": {
