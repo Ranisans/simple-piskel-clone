@@ -2,7 +2,7 @@ import React from 'react';
 
 import Label from './Label';
 import ClearButton from './ClearButton';
-import SignInButton from './SigtInButton';
+import SignInButton from './SignInButton';
 
 const Menu = () => (
   <section className="main_menu">

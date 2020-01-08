@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ClearButton tests renders the component 1`] = `
+<button
+  className="main_menu-button login_btn"
+  onClick={[Function]}
+>
+  Clear
+</button>
+`;

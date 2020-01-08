@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Menu tests create snapshot 1`] = `
+<section
+  className="main_menu"
+>
+  <h2
+    className="section_label"
+  >
+    Main Menu
+  </h2>
+  <h3
+    className="main_menu-label"
+  >
+    Simple Piskel Clone
+  </h3>
+  <Label />
+  <ClearButton />
+  <SignInButton />
+</section>
+`;

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddFrameButton tests create snapshot 1`] = `
+<div
+  className="add_frame"
+  onClick={[Function]}
+  title="shortcut: N"
+>
+  <div
+    className="add_frame-icon"
+  />
+  <p
+    className="add_frame-label"
+  >
+    Add new frame
+  </p>
+</div>
+`;
