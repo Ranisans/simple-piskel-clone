@@ -28,11 +28,8 @@ class CanvasLogic extends CanvasLogicAbstract {
     this.DrawingCanvas.setCanvasSize(canvasSize);
   }
 
-  clear() {
-    this.context.clearRect(0, 0, this.canvasSize, this.canvasSize);
-  }
-
   setImageData(imageData) {
+    this.clear();
     if (imageData) {
       const img = new Image();
       img.src = imageData;
@@ -40,8 +37,6 @@ class CanvasLogic extends CanvasLogicAbstract {
       img.onload = () => {
         this.context.drawImage(img, 0, 0, this.canvasSize, this.canvasSize);
       };
-    } else {
-      this.clear();
     }
   }
 

@@ -11,6 +11,10 @@ class CanvasAbstract {
     }
   }
 
+  clear() {
+    this.context.clearRect(0, 0, this.canvasSize, this.canvasSize);
+  }
+
   _setCanvasSize(canvasSize) {
     this.canvasSize = canvasSize;
     this.canvasObject.width = this.canvasSize;

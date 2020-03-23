@@ -46,9 +46,14 @@ class PreviewLogic {
     this.intervalId = setInterval(animate, this.second / this.fps);
   }
 
+  clear() {
+    this.context.clearRect(0, 0, this.canvasSize, this.canvasSize);
+  }
+
   _animate() {
     if (!this.frames || !this.framesQueue) { return; }
     const { imageData } = this.frames[this.framesQueue[this.animatePosition]];
+    this.clear();
     if (imageData) {
       const img = new Image();
       img.src = imageData;
@@ -58,7 +63,6 @@ class PreviewLogic {
       };
     } else {
       this.context.fillStyle = 'rgba(0,0,0,0)';
-      this.context.clearRect(0, 0, this.canvasSize, this.canvasSize);
     }
     if (this.animatePosition + 1 >= this.framesQueue.length) {
       this.animatePosition = 0;

@@ -20,6 +20,7 @@ class FrameLogic extends CanvasAbstract {
   }
 
   setImage(imageData) {
+    this.clear();
     if (imageData) {
       const img = new Image();
       img.src = imageData;
