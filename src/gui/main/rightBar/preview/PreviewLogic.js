@@ -1,5 +1,3 @@
-import convertLocalStorageCanvas from '../../../../logic/convertLocalStorageCanvas';
-
 class PreviewLogic {
   constructor() {
     this.second = 1000;
@@ -52,7 +50,7 @@ class PreviewLogic {
     if (!this.frames || !this.framesQueue) { return; }
     const { imageData } = this.frames[this.framesQueue[this.animatePosition]];
     if (imageData) {
-      this.context.putImageData(convertLocalStorageCanvas(imageData, this.canvasSize), 0, 0);
+      this.context.putImageData(imageData, 0, 0);
     } else {
       this.context.fillStyle = 'rgba(0,0,0,0)';
       this.context.clearRect(0, 0, this.canvasSize, this.canvasSize);

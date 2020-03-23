@@ -1,4 +1,3 @@
-import convertLocalStorageCanvas from '../../../../logic/convertLocalStorageCanvas';
 import CanvasAbstract from '../../CanvasAbstract';
 
 class FrameLogic extends CanvasAbstract {
@@ -22,7 +21,7 @@ class FrameLogic extends CanvasAbstract {
 
   setImage(imageData) {
     if (imageData) {
-      this.context.putImageData(convertLocalStorageCanvas(imageData, this.canvasSize), 0, 0);
+      this.context.putImageData(imageData, 0, 0);
     } else {
       this.context.clearRect(0, 0, this.canvasSize, this.canvasSize);
     }
