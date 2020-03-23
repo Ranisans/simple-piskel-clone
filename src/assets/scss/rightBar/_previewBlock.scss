@@ -13,6 +13,12 @@
 
     image-rendering: pixelated;
   }
+  
+  @supports ( -moz-appearance:none ) {
+    &-canvas {
+      image-rendering: -moz-crisp-edges;
+    }
+  }
 }
 
 .preview_actions {

@@ -23,6 +23,12 @@
   }
 }
 
+@supports ( -moz-appearance:none ) {
+  .additional_canvas, .main_canvas {
+    image-rendering: -moz-crisp-edges;
+  }
+}
+
 .canvas_background {
   position: absolute;
   top: 0;
