@@ -65,8 +65,8 @@ const Canvas = () => {
 
   // didUpdate canvas box size
   useEffect(() => {
-    canvasLogic.settCanvasBoxSize(canvasState.boxSize);
-    strokeLogic.settCanvasBoxSize(canvasState.boxSize);
+    canvasLogic.setCanvasBoxSize(canvasState.boxSize);
+    strokeLogic.setCanvasBoxSize(canvasState.boxSize);
   }, [canvasState.boxSize]);
 
   // didUpdate pen size

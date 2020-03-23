@@ -19,7 +19,7 @@ const Frame = ({ frameId, index }) => {
     dispatch(updateFrameById({ frameId, imageData }));
   };
 
-  const [frameLogic] = useState(new FrameLogic({ updateFrameDataAfterResize }));
+  const [frameLogic] = useState(new FrameLogic(updateFrameDataAfterResize));
 
 
   // didMount

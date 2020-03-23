@@ -34,7 +34,12 @@ class CanvasLogic extends CanvasLogicAbstract {
 
   setImageData(imageData) {
     if (imageData) {
-      this.context.putImageData(imageData, 0, 0);
+      const img = new Image();
+      img.src = imageData;
+      this.context.imageSmoothingEnabled = false;
+      img.onload = () => {
+        this.context.drawImage(img, 0, 0, this.canvasSize, this.canvasSize);
+      };
     } else {
       this.clear();
     }
@@ -46,7 +51,7 @@ class CanvasLogic extends CanvasLogicAbstract {
       [color.r, color.g, color.b, color.a],
     );
 
-    const imageData = this.context.getImageData(0, 0, this.canvasSize, this.canvasSize);
+    const imageData = this.canvasObject.toDataURL();
     this.frameUpdateCallback(imageData);
   }
 
@@ -97,7 +102,8 @@ class CanvasLogic extends CanvasLogicAbstract {
         latestY = offsetY;
       }
 
-      const imageData = this.context.getImageData(0, 0, this.canvasSize, this.canvasSize);
+      // const imageData = this.context.getImageData(0, 0, this.canvasSize, this.canvasSize);
+      const imageData = this.canvasObject.toDataURL();
       this.frameUpdateCallback(imageData);
     };
 

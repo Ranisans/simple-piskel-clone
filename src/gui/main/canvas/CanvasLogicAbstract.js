@@ -11,7 +11,7 @@ class CanvasLogicAbstract extends CanvasAbstract {
     this.DrawingCanvas.setPixelSize(this.pixelSize);
   }
 
-  settCanvasBoxSize(boxSize) {
+  setCanvasBoxSize(boxSize) {
     this.canvasBoxSize = boxSize;
     this.canvasProportion = this.canvasSize / this.canvasBoxSize;
     this.LEFT_BUTTON = 0;

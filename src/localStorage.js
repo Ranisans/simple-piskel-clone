@@ -1,8 +1,5 @@
-import convertLocalStorageCanvas from './logic/convertLocalStorageCanvas';
-
 const storageName = 'redux_state';
 
-const activeFrameKey = 'activeFrame';
 
 export const loadStorage = () => {
   try {
@@ -11,15 +8,6 @@ export const loadStorage = () => {
       return undefined;
     }
     const state = JSON.parse(serializedState);
-    const { size } = state.canvas;
-    Object.keys(state.frame).forEach((key) => {
-      if (key === activeFrameKey) {
-        return;
-      }
-      const { imageData } = state.frame[key];
-      state.frame[key].imageData = convertLocalStorageCanvas(imageData, size);
-    });
-
     const primaryColor = state.color.primary;
     const secondaryColor = state.color.secondary;
     state.colorPicker.primaryPicker = primaryColor;

@@ -50,7 +50,12 @@ class PreviewLogic {
     if (!this.frames || !this.framesQueue) { return; }
     const { imageData } = this.frames[this.framesQueue[this.animatePosition]];
     if (imageData) {
-      this.context.putImageData(imageData, 0, 0);
+      const img = new Image();
+      img.src = imageData;
+      this.context.imageSmoothingEnabled = false;
+      img.onload = () => {
+        this.context.drawImage(img, 0, 0, this.canvasSize, this.canvasSize);
+      };
     } else {
       this.context.fillStyle = 'rgba(0,0,0,0)';
       this.context.clearRect(0, 0, this.canvasSize, this.canvasSize);

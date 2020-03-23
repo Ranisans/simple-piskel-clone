@@ -1,7 +1,7 @@
 import CanvasAbstract from '../../CanvasAbstract';
 
 class FrameLogic extends CanvasAbstract {
-  constructor({ updateFrameDataAfterResize }) {
+  constructor(updateFrameDataAfterResize) {
     super();
     this.updateFrameDataAfterResize = updateFrameDataAfterResize;
   }
@@ -15,13 +15,18 @@ class FrameLogic extends CanvasAbstract {
 
   async setCanvasSize(size) {
     await super.setCanvasSize(size);
-    const imageData = this.context.getImageData(0, 0, this.canvasSize, this.canvasSize);
+    const imageData = this.canvasObject.toDataURL();
     this.updateFrameDataAfterResize(imageData);
   }
 
   setImage(imageData) {
     if (imageData) {
-      this.context.putImageData(imageData, 0, 0);
+      const img = new Image();
+      img.src = imageData;
+      this.context.imageSmoothingEnabled = false;
+      img.onload = () => {
+        this.context.drawImage(img, 0, 0, this.canvasSize, this.canvasSize);
+      };
     } else {
       this.context.clearRect(0, 0, this.canvasSize, this.canvasSize);
     }
