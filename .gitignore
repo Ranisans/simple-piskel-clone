@@ -65,3 +65,4 @@ dist/
 
 # my rules
 package-lock.json
+yarn.lock
