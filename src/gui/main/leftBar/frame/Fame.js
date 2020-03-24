@@ -3,10 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Draggable } from 'react-beautiful-dnd';
 
-import { activateFrame } from '../../../../actions/frameAction';
+import { activateFrame, updateFrameById } from '../../../../actions/frameAction';
 import CopyButton from './CopyButton';
 import DeleteButton from './DeleteButton';
 import FrameCanvas from './FrameCanvas';
+import FrameLogic from './FrameLogic';
 
 const BASE_FRAME_CLASS = 'preview_tile';
 const ACTIVE_FRAME_CLASS = `${BASE_FRAME_CLASS} preview_tile--active`;
@@ -16,6 +17,12 @@ const Frame = ({ frameId, index }) => {
   const [frameClass, setFrameClass] = useState(BASE_FRAME_CLASS);
 
   const dispatch = useDispatch();
+
+  const updateFrameDataAfterResize = (newImageData) => {
+    dispatch(updateFrameById({ frameId, imageData: newImageData }));
+  };
+
+  const [frameLogic] = useState(new FrameLogic(updateFrameDataAfterResize));
 
   // didUpdate activeFrame
   useEffect(() => {
@@ -42,7 +49,7 @@ const Frame = ({ frameId, index }) => {
           {...provided.dragHandleProps}
         >
           <div className="frame_container">
-            <FrameCanvas frameId={frameId} />
+            <FrameCanvas frameId={frameId} frameLogic={frameLogic} />
             <CopyButton frameId={frameId} />
             <DeleteButton frameId={frameId} />
           </div>

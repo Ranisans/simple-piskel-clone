@@ -1,31 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import { updateFrameById } from '../../../../actions/frameAction';
-import FrameLogic from './FrameLogic';
-
-
-const FrameCanvas = ({ frameId }) => {
+const FrameCanvas = ({ frameId, frameLogic }) => {
   const canvasBoxSize = 96;
   const imageData = useSelector((state) => state.frame[frameId].imageData);
-  const dispatch = useDispatch();
+  const size = useSelector((state) => state.canvas.size);
 
-  const canvasData = useSelector((state) => state.canvas);
-  const updateFrameDataAfterResize = (newImageData) => {
-    dispatch(updateFrameById({ frameId, imageData: newImageData }));
-  };
-
-  const [frameLogic] = useState(new FrameLogic(updateFrameDataAfterResize));
+  const [currentSize, setCurrentSize] = useState(size);
 
   // didMount
   useEffect(() => {
-    frameLogic.initialize(frameId, canvasBoxSize);
+    frameLogic.initialize(frameId, canvasBoxSize, size, imageData);
   }, []);
 
   // didUpdate size of canvas
   useEffect(() => {
-    frameLogic.setCanvasSize(canvasData.size);
-  }, [canvasData.size]);
+    if (size !== currentSize) {
+      frameLogic.updateCanvasSize(size);
+      setCurrentSize(size);
+    }
+  }, [size]);
 
   // didUpdate if set imageData
   useEffect(() => {
@@ -43,6 +38,10 @@ const FrameCanvas = ({ frameId }) => {
       ></canvas>
     </>
   );
+};
+
+FrameCanvas.propTypes = {
+  frameId: PropTypes.string,
 };
 
 export default FrameCanvas;

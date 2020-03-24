@@ -21,8 +21,8 @@ const Canvas = () => {
   const secondaryPickerId = 1;
 
   const canvasState = useSelector((state) => state.canvas);
-  const penSizeState = useSelector((state) => state.penSize);
-  const toolState = useSelector((state) => state.tools);
+  const penSize = useSelector((state) => state.penSize.size);
+  const currentTool = useSelector((state) => state.tools.tool);
   const colorsState = useSelector((state) => state.color);
   const frameState = useSelector((state) => state.frame);
 
@@ -71,9 +71,9 @@ const Canvas = () => {
 
   // didUpdate pen size
   useEffect(() => {
-    canvasLogic.setPixelSize(penSizeState.size);
-    strokeLogic.setPixelSize(penSizeState.size);
-  }, [penSizeState]);
+    canvasLogic.setPixelSize(penSize);
+    strokeLogic.setPixelSize(penSize);
+  }, [penSize]);
 
   // didUpdate canvas size
   useEffect(() => {
@@ -84,8 +84,8 @@ const Canvas = () => {
   // didUpdate tool
   useEffect(() => {
     // if tool is stroke - Stroke logic;
-    canvasLogic.setTool(toolState.tool);
-  }, [toolState]);
+    canvasLogic.setTool(currentTool);
+  }, [currentTool]);
 
   // didUpdate colors
   useEffect(() => {
@@ -96,7 +96,7 @@ const Canvas = () => {
   // didUpdate activeFrame
   useEffect(() => {
     canvasLogic.setImageData(frameState[frameState.activeFrame].imageData);
-  }, [frameState.activeFrame]);
+  }, [frameState.activeFrame, frameState[frameState.activeFrame].imageData]);
 
   return (
     <div className="main_canvas_block">
@@ -109,7 +109,7 @@ const Canvas = () => {
         <canvas
           className={
             [additionalCanvasClass,
-              toolState.tool !== toolBtn.stroke
+              currentTool !== toolBtn.stroke
                 ? `${additionalCanvasClass}--hidden`
                 : null].join(' ')}
           onContextMenu={(e) => { e.preventDefault(); }}
