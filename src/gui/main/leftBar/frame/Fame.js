@@ -3,39 +3,30 @@ import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Draggable } from 'react-beautiful-dnd';
 
-import { activateFrame, updateFrameById } from '../../../../actions/frameAction';
-import FrameLogic from './FrameLogic';
+import { activateFrame } from '../../../../actions/frameAction';
 import CopyButton from './CopyButton';
 import DeleteButton from './DeleteButton';
+import FrameCanvas from './FrameCanvas';
 
+const BASE_FRAME_CLASS = 'preview_tile';
+const ACTIVE_FRAME_CLASS = `${BASE_FRAME_CLASS} preview_tile--active`;
 
 const Frame = ({ frameId, index }) => {
-  const canvasBoxSize = 96;
-  const frameData = useSelector((state) => state.frame);
-  const canvasData = useSelector((state) => state.canvas);
+  const activeFrame = useSelector((state) => state.frame.activeFrame);
+  const [frameClass, setFrameClass] = useState(BASE_FRAME_CLASS);
 
   const dispatch = useDispatch();
-  const updateFrameDataAfterResize = (imageData) => {
-    dispatch(updateFrameById({ frameId, imageData }));
-  };
 
-  const [frameLogic] = useState(new FrameLogic(updateFrameDataAfterResize));
-
-
-  // didMount
+  // didUpdate activeFrame
   useEffect(() => {
-    frameLogic.initialize(frameId, canvasBoxSize);
-  }, []);
-
-  // didUpdate size of canvas
-  useEffect(() => {
-    frameLogic.setCanvasSize(canvasData.size);
-  }, [canvasData.size]);
-
-  // didUpdate if set imageData
-  useEffect(() => {
-    frameLogic.setImage(frameData[frameId].imageData);
-  }, [frameData[frameId].imageData]);
+    if (activeFrame === frameId) {
+      if (frameClass !== ACTIVE_FRAME_CLASS) {
+        setFrameClass(ACTIVE_FRAME_CLASS);
+      }
+    } else if (frameClass !== BASE_FRAME_CLASS) {
+      setFrameClass(BASE_FRAME_CLASS);
+    }
+  }, [activeFrame]);
 
   const setFrameActive = () => {
     dispatch(activateFrame({ frameId }));
@@ -44,22 +35,14 @@ const Frame = ({ frameId, index }) => {
   return (
     <Draggable draggableId={frameId} index={index}>
       {(provided) => (
-        <div className={[
-          'preview_tile',
-          frameData.activeFrame === frameId ? 'preview_tile--active' : null,
-        ].join(' ')} onClick={setFrameActive}
+        <div className={frameClass}
+          onClick={setFrameActive}
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
           <div className="frame_container">
-            <div className="canvas_background"></div>
-            <canvas
-              className="frame_container-canvas"
-              id={frameId}
-              width={canvasBoxSize}
-              height={canvasBoxSize}
-            ></canvas>
+            <FrameCanvas frameId={frameId} />
             <CopyButton frameId={frameId} />
             <DeleteButton frameId={frameId} />
           </div>
@@ -71,6 +54,7 @@ const Frame = ({ frameId, index }) => {
 
 Frame.propTypes = {
   frameId: PropTypes.string,
+  index: PropTypes.number,
 };
 
 export default Frame;
