@@ -6,7 +6,6 @@ import { shortcuts } from '../../../../logic/shortcuts';
 const UPNG = require('upng-js');
 
 const APNGExportButton = () => {
-  const frameState = useSelector((state) => state.frame);
   const frameListState = useSelector((state) => state.frameList);
   const canvasState = useSelector((state) => state.canvas);
 
@@ -16,7 +15,9 @@ const APNGExportButton = () => {
     const buffers = [];
 
     frameListState.frames.forEach((frameId) => {
-      const { imageData } = frameState[frameId];
+      const canvasObject = document.querySelector(`#${frameId}`);
+      const context = canvasObject.getContext('2d');
+      const imageData = context.getImageData(0, 0, canvasState.size, canvasState.size);
       buffers.push(imageData.data.buffer);
     });
     const fps = second / parseInt(
