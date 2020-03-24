@@ -62,6 +62,7 @@ typings/
 
 # npm build
 dist/
+build/
 
 # my rules
 package-lock.json

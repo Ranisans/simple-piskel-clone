@@ -13,7 +13,7 @@ module.exports = (env, args) => {
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, './dist'),
+      path: path.resolve(__dirname, './build'),
     },
     module: {
       rules: [
@@ -85,8 +85,8 @@ module.exports = (env, args) => {
         filename: 'index.html',
       }),
       new CopyPlugin([{
-        from: './node_modules/gif.js-upgrade/dist/gif.worker.js',
-        to: path.resolve(__dirname, './dist'),
+        from: './node_modules/gif.js-upgrade/build/gif.worker.js',
+        to: path.resolve(__dirname, './build'),
       }]),
       new FaviconsWebpackPlugin({
         logo: './public/sunny.png',
@@ -105,7 +105,7 @@ module.exports = (env, args) => {
       }),
     ],
     devServer: {
-      contentBase: path.join(__dirname, 'dist'),
+      contentBase: path.join(__dirname, 'build'),
       compress: true,
       port: 3000,
       stats: 'errors-only',
