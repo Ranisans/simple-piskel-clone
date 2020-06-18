@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import InputColor from 'react-input-color';
 
 import { colorsElements, changePrimaryColor, changeSecondaryColor } from '../../../../actions/colorAction';
+import { changePrimaryPickerColor, changeSecondaryPickerColor } from '../../../../actions/colorPickerAction';
 
 const ColorButton = ({ className, colorName }) => {
   const dispatch = useDispatch();
@@ -16,11 +17,13 @@ const ColorButton = ({ className, colorName }) => {
     ? primaryPickerId : secondaryPickerId;
 
   const dispatchColor = (colorObj) => {
-    dispatch(
-      paramArrayPosition === primaryPickerId
-        ? changePrimaryColor({ color: colorObj })
-        : changeSecondaryColor({ color: colorObj }),
-    );
+    if (paramArrayPosition === primaryPickerId) {
+      dispatch(changePrimaryColor({ color: colorObj }));
+      dispatch(changePrimaryPickerColor({ color: colorObj }));
+    } else {
+      dispatch(changeSecondaryColor({ color: colorObj }));
+      dispatch(changeSecondaryPickerColor({ color: colorObj }));
+    }
   };
 
   const changeColor = (color) => {
@@ -41,8 +44,8 @@ const ColorButton = ({ className, colorName }) => {
     const nextPickerColors = colorPickerState[`${colorName}Picker`];
     if (nextPickerColors.hex !== currentColor.hex) {
       currentColor.hex = nextPickerColors.hex;
+      dispatchColor(nextPickerColors);
     }
-    dispatchColor(nextPickerColors);
   }, [colorPickerState]);
 
   return (
