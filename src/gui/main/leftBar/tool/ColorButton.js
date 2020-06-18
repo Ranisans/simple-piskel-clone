@@ -2,9 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import InputColor from 'react-input-color';
 
-
 import { colorsElements, changePrimaryColor, changeSecondaryColor } from '../../../../actions/colorAction';
-
 
 const ColorButton = ({ className, colorName }) => {
   const dispatch = useDispatch();

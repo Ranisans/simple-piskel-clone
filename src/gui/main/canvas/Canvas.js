@@ -15,7 +15,6 @@ import {
 import { updateActiveFrame } from '../../../actions/frameAction';
 import { toolBtn } from '../../../actions/toolActionTypes';
 
-
 const Canvas = () => {
   const primaryPickerId = 0;
   const secondaryPickerId = 1;
@@ -43,7 +42,6 @@ const Canvas = () => {
     dispatch(updateActiveFrame({ imageData }));
   };
 
-
   const [canvasLogic] = useState(
     new CanvasLogic({ pipetteCallback, frameUpdateCallback }),
   );
@@ -55,7 +53,6 @@ const Canvas = () => {
   const [strokeLogic] = useState(
     new StrokeLogic(drawLine),
   );
-
 
   // didMount
   useEffect(() => {

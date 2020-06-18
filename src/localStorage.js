@@ -1,6 +1,5 @@
 const storageName = 'redux_state';
 
-
 export const loadStorage = () => {
   try {
     const serializedState = localStorage.getItem(storageName);

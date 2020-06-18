@@ -1,7 +1,6 @@
 import { colorsElements } from '../actions/colorAction';
 import * as ACTIONS from '../actions/colorPickerAction';
 
-
 export const initialState = {
   primaryPicker: colorsElements[0].baseColor,
   secondaryPicker: colorsElements[1].baseColor,

@@ -11,7 +11,7 @@
     "start": "webpack-dev-server --history-api-fallback --inline --progress --open --mode development",
     "clear": "del-cli dist",
     "build": "npm run clear -s && webpack --progress --mode production",
-    "lint": "eslint ./src",
+    "lint": "eslint ./src --fix",
     "test": "jest --coverage",
     "test:coverage": "jest --coverage --coverage-reporters=lcov",
     "test:watch": "jest --watch",

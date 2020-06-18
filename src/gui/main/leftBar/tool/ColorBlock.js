@@ -9,7 +9,6 @@ const ColorBlock = () => {
   const colorBlockCls = 'color_block';
   const dispatch = useDispatch();
 
-
   const colorExchangeHandler = () => {
     dispatch(exchangeColors());
   };

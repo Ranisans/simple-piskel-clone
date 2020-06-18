@@ -30,5 +30,4 @@ ToolButton.propTypes = {
   activeBtnClass: PropTypes.string,
 };
 
-
 export default ToolButton;

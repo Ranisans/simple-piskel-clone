@@ -22,7 +22,6 @@ const SignInButton = () => {
     firebase.initializeApp(firebaseConfig);
   }
 
-
   const onClickHandler = () => {
     const label = document.querySelector('.main_menu-project_label');
     if (!isLogged) {

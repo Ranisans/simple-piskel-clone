@@ -23,7 +23,6 @@ class BucketLogic {
     return `rgba(${this.pixels[pixelStart]}, ${this.pixels[pixelStart + 1]}, ${this.pixels[pixelStart + 2]}, ${this.pixels[pixelStart + 3]})`;
   }
 
-
   _findTopAreaInColumn(xFind, yFind, colorRGBA) {
     let nextY = yFind;
     while (
@@ -42,7 +41,6 @@ class BucketLogic {
 
     const imageData = this.context.getImageData(0, 0, this.size, this.size);
     this.pixels = imageData.data;
-
 
     const colorOfSelectedPixelRGBA = this._getPixelColor(x, y);
     const brushRGBA = `rgba(${bucketColor.r}, ${bucketColor.g}, ${bucketColor.b}, ${bucketColor.a})`;

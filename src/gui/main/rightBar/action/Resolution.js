@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeCanvasSize } from '../../../../actions/canvasAction';
 
-
 const Resolution = () => {
   const dispatch = useDispatch();
 
