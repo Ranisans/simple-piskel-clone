@@ -7,7 +7,6 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
-
 module.exports = (env, args) => {
   const config = {
     entry: './src/index.js',
@@ -85,7 +84,7 @@ module.exports = (env, args) => {
         filename: 'index.html',
       }),
       new CopyPlugin([{
-        from: './node_modules/gif.js-upgrade/build/gif.worker.js',
+        from: './node_modules/gif.js-upgrade/dist/gif.worker.js',
         to: path.resolve(__dirname, './build'),
       }]),
       new FaviconsWebpackPlugin({
